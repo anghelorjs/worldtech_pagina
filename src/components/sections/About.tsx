@@ -13,11 +13,11 @@ const About: React.FC = () => {
     },
     {
       title: 'Calidad Garantizada',
-      description: 'Cada proyecto pasa por rigurosos controles de calidad para asegurar la máxima satisfacción.',
+      description: 'Cada proyecto pasa por rigurosos controles de calidad para asegurar la máxima satisfacción de nuestros clientes.',
     },
     {
       title: 'Compromiso Total',
-      description: 'Trabajamos en estrecha colaboración con nuestros clientes hasta lograr sus objetivos.',
+      description: 'Trabajamos en estrecha colaboración con nuestros clientes hasta lograr sus objetivos y entregarle un producto de calidad.',
     },
   ];
 
@@ -60,7 +60,7 @@ const About: React.FC = () => {
         {/* Tres tarjetas de características */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {features.map((feature, index) => (
-            <FeatureCard key={index} title={feature.title} description={feature.description} />
+            <FeatureCard key={index} title={feature.title} description={feature.description} index={index} />
           ))}
         </div>
 
