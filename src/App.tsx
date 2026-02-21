@@ -1,6 +1,8 @@
+import React from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
+import About from './components/sections/About';
 import CurveSeparator from './components/common/CurveSeparator';
 
 function App() {
@@ -11,6 +13,8 @@ function App() {
         <main>
           <Hero />
           <CurveSeparator />
+          <About />
+          {/* Próximamente: Services, Contact, etc. */}
         </main>
       </div>
     </ThemeProvider>
