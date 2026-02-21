@@ -64,7 +64,7 @@ const StyledWrapper = styled.div`
     --padding: 4px;
     --transition: 0.4s;
     --button-color: #101010;
-    --highlight-color-hue: 210deg;
+    --highlight-color-hue: 280deg;
 
     user-select: none;
     display: flex;
@@ -77,6 +77,9 @@ const StyledWrapper = styled.div`
     letter-spacing: 0.5px;
 
     background-color: var(--button-color);
+    position: relative;
+    z-index: 1;
+
     box-shadow:
       inset 0px 1px 1px rgba(255, 255, 255, 0.2),
       inset 0px 2px 2px rgba(255, 255, 255, 0.15),
@@ -89,28 +92,31 @@ const StyledWrapper = styled.div`
       0px -8px 8px rgba(0, 0, 0, 0.06),
       0px -16px 16px rgba(0, 0, 0, 0.08);
 
-    border: solid 1px #fff2;
+    border: solid 2px transparent;
+    background-image: linear-gradient(var(--button-color), var(--button-color)), 
+                      linear-gradient(135deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     border-radius: var(--border-radius);
     cursor: pointer;
     min-width: 220px;
 
     transition:
       box-shadow var(--transition),
-      border var(--transition),
       background-color var(--transition);
   }
   
   .btn::before {
     content: "";
     position: absolute;
-    top: calc(0px - var(--padding));
-    left: calc(0px - var(--padding));
-    width: calc(100% + var(--padding) * 2);
-    height: calc(100% + var(--padding) * 2);
-    border-radius: calc(var(--border-radius) + var(--padding));
+    top: calc(0px - var(--padding) - 1px);
+    left: calc(0px - var(--padding) - 1px);
+    width: calc(100% + var(--padding) * 2 + 2px);
+    height: calc(100% + var(--padding) * 2 + 2px);
+    border-radius: calc(var(--border-radius) + var(--padding) + 1px);
     pointer-events: none;
     background-image: linear-gradient(0deg, #0004, #000a);
-    z-index: -1;
+    z-index: -2;
     transition:
       box-shadow var(--transition),
       filter var(--transition);
@@ -145,6 +151,7 @@ const StyledWrapper = styled.div`
     transition:
       opacity var(--transition),
       filter var(--transition);
+    z-index: 1;
   }
 
   .btn-letter {
@@ -179,6 +186,7 @@ const StyledWrapper = styled.div`
       filter var(--transition),
       opacity var(--transition);
     flex-shrink: 0;
+    z-index: 2;
   }
   
   @keyframes flicker {
@@ -194,6 +202,7 @@ const StyledWrapper = styled.div`
     justify-content: center;
     min-width: 180px;
     height: 32px;
+    z-index: 2;
   }
   
   .txt-1,
@@ -318,8 +327,12 @@ const StyledWrapper = styled.div`
   .txt-2 .btn-letter:nth-child(14) { animation-delay: 0.65s; }
 
   .btn:active {
-    border: solid 1px hsla(var(--highlight-color-hue), 100%, 80%, 70%);
-    background-color: hsla(var(--highlight-color-hue), 50%, 20%, 0.5);
+    border: solid 2px transparent;
+    background-image: linear-gradient(var(--button-color), var(--button-color)), 
+                      linear-gradient(135deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    filter: brightness(1.1);
   }
   
   .btn:active::before {
@@ -344,7 +357,12 @@ const StyledWrapper = styled.div`
   }
 
   .btn:hover {
-    border: solid 1px hsla(var(--highlight-color-hue), 100%, 80%, 40%);
+    border: solid 2px transparent;
+    background-image: linear-gradient(var(--button-color), var(--button-color)), 
+                      linear-gradient(135deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    filter: brightness(1.05);
   }
 
   .btn:hover::before {
