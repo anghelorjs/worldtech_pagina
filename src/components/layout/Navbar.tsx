@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
             ? 'bg-black/80 backdrop-blur-md' 
             : 'bg-black/80 backdrop-blur-md'
           }
-          border border-gray-800
+          border border-white-400
         `}
       >
         <div className="flex items-center justify-between">

@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '../common/Container';
 import ProfileCircle from '../common/ProfileCircle';
 import FeatureCard from '../common/FeatureCard';
-import StatItem from '../common/StatItem';
+import StatsCarousel from '../common/StatItem';   // ← default export is the carousel
 import SocialCard from '../common/SocialCard';
 
 const About: React.FC = () => {
@@ -22,11 +22,11 @@ const About: React.FC = () => {
   ];
 
   const stats = [
-    { value: '10+', label: 'Proyectos Completados' },
-    { value: '99%', label: 'Satisfacción del Cliente' },
-    { value: '8+', label: 'Años de Experiencia' },
+    { value: '10+',  label: 'Proyectos Completados' },
+    { value: '99%',  label: 'Satisfacción del Cliente' },
+    { value: '5+',   label: 'Años de Experiencia' },
     { value: '24/7', label: 'Soporte Técnico' },
-    { value: '1.2k', label: 'Visitas' }, // Quinta estadística
+    { value: '0',    label: 'Visitas' }, // valor real se inyecta desde localStorage
   ];
 
   return (
@@ -34,17 +34,17 @@ const About: React.FC = () => {
       <Container>
         {/* Título */}
         <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-8">
-        <span className="text-white">Sobre</span>{' '}
-        <span
+          <span className="text-white">Sobre</span>{' '}
+          <span
             style={{
-            background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+              background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
             }}
-        >
+          >
             Technological World
-        </span>
+          </span>
         </h2>
 
         {/* Párrafo */}
@@ -58,17 +58,15 @@ const About: React.FC = () => {
         </div>
 
         {/* Tres tarjetas de características */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {features.map((feature, index) => (
             <FeatureCard key={index} title={feature.title} description={feature.description} index={index} />
           ))}
         </div>
 
-        {/* Estadísticas */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-20">
-          {stats.map((stat, index) => (
-            <StatItem key={index} value={stat.value} label={stat.label} />
-          ))}
+        {/* Estadísticas en carrusel — ocupa el ancho completo del Container */}
+        <div className="mb-20">
+          <StatsCarousel stats={stats} />
         </div>
 
         {/* Redes sociales */}
