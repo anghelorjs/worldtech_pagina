@@ -30,13 +30,21 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="sobre-nosotros" className="py-0" style={{ backgroundColor: '#081022' }}>
+    <section id="sobre-nosotros" className="pt-0 pb-20" style={{ backgroundColor: '#081022' }}>
       <Container>
         {/* Título */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-          <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-            Sobre Technological World
-          </span>
+        <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-8">
+        <span className="text-white">Sobre</span>{' '}
+        <span
+            style={{
+            background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            }}
+        >
+            Technological World
+        </span>
         </h2>
 
         {/* Párrafo */}
