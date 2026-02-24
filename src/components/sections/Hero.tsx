@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
     <section id="inicio" className="min-h-screen flex items-center bg-black">
       <Container>
         <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Columna de texto */}
+          {/* Columna de texto h1 */}
           <div className="flex-1 text-center md:text-center">
             <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold">
               <span 
