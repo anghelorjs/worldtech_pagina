@@ -13,7 +13,6 @@ function App() {
           <Hero />
           <CurveSeparator />
           <About />
-          {/* Próximamente: Services, Contact, etc. */}
         </main>
       </div>
     </ThemeProvider>
