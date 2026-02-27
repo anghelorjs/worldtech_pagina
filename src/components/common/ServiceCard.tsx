@@ -6,54 +6,66 @@ interface ServiceCardProps {
   title: string;
   description: string;
   image: string;
-  index: number; // para variar el ícono (puedes cambiarlo por un icono específico si quieres)
+  icon: React.ReactNode;
+  isReversed?: boolean; // true para imagen a la derecha, false para imagen a la izquierda
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, image, index }) => {
-  // Íconos variados para la esquina (puedes reemplazar con tus propios SVG)
-  const icons = [
-    '💻', // Sistemas
-    '🔍', // Forense
-    '📱', // Landing
-    '👤', // Portafolio
-    '🛒', // E-commerce
-    '📖', // Catálogo
-  ];
+const ServiceCard: React.FC<ServiceCardProps> = ({ 
+  title, 
+  description, 
+  image, 
+  icon,
+  isReversed = false 
+}) => {
+  // Clases para el orden de las columnas
+  const imageColumnOrder = isReversed ? 'md:order-2' : 'md:order-1';
+  const contentColumnOrder = isReversed ? 'md:order-1' : 'md:order-2';
 
   return (
-    <div className="group relative w-full overflow-hidden rounded-3xl bg-gray-900/60 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700 transition-all duration-500">
-      {/* Imagen de fondo con overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={image} 
-          alt="" 
-          className="w-full h-full object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-700"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent" />
-      </div>
+    <div className="w-full bg-gray-900/40 rounded-3xl overflow-hidden border border-gray-800/50 backdrop-blur-sm">
+      <div className="flex flex-col md:flex-row min-h-[500px] md:min-h-[450px]">
+        {/* Columna de la imagen (izquierda o derecha según isReversed) */}
+        <div className={`relative w-full md:w-[70%] ${imageColumnOrder}`}>
+          {/* Imagen de fondo */}
+          <div className="absolute inset-0">
+            <img 
+              src={image} 
+              alt="" 
+              className="w-full h-full object-cover"
+            />
+            {/* Overlay oscuro (60% de opacidad como mencionaste) */}
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
 
-      {/* Contenido */}
-      <div className="relative z-10 p-8 md:p-10 lg:p-12 flex flex-col items-start min-h-[400px] md:min-h-[450px]">
-        {/* Ícono superior izquierda */}
-        <span className="text-4xl md:text-5xl mb-6 md:mb-8 bg-gray-800/50 p-4 rounded-2xl backdrop-blur-sm border border-gray-700/50">
-          {icons[index % icons.length]}
-        </span>
+          {/* Contenido sobre la imagen */}
+          <div className="relative z-10 h-full flex flex-col p-8 md:p-10">
+            {/* Ícono SVG en la esquina superior izquierda */}
+            <div className="mb-auto">
+              <div className="w-14 h-14 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 flex items-center justify-center">
+                {icon}
+              </div>
+            </div>
 
-        {/* Título */}
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 max-w-xl">
-          {title}
-        </h3>
+            {/* Título del servicio */}
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-16 max-w-xs">
+              {title}
+            </h3>
+          </div>
+        </div>
 
-        {/* Descripción */}
-        <p className="text-gray-300 text-base md:text-lg mb-8 max-w-xl">
-          {description}
-        </p>
+        {/* Línea divisoria vertical (solo en desktop) */}
+        <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent my-8" />
 
-        {/* Botón */}
-        <div className="mt-auto">
-          <Button href="#contacto" variant="primary" className="text-sm md:text-base">
-            Comenzar Proyecto
-          </Button>
+        {/* Columna de contenido (descripción + botón) */}
+        <div className={`flex-1 flex flex-col justify-center p-8 md:p-12 ${contentColumnOrder}`}>
+          <div className="max-w-md mx-auto md:mx-0">
+            <p className="text-gray-200 text-base md:text-lg leading-relaxed mb-8 text-center">
+              {description}
+            </p>
+            <Button href="#contacto" variant="primary">
+              Comenzar Proyecto
+            </Button>
+          </div>
         </div>
       </div>
     </div>

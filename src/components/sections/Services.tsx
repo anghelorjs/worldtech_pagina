@@ -50,15 +50,16 @@ const Services: React.FC = () => {
             Servicios especializados para empresas que requieren soluciones tecnológicas de alta complejidad.
           </p>
 
-          {/* Tarjetas de servicios avanzados - UNA POR FILA (según diseño) */}
-          <div className="space-y-8">
+          {/* Servicios avanzados - uno por fila, intercalados */}
+          <div className="space-y-12">
             {avanzadas.map((service, idx) => (
               <ServiceCard
                 key={service.id}
                 title={service.title}
                 description={service.description}
                 image={service.image}
-                index={idx}
+                icon={service.icon}
+                isReversed={idx % 2 === 1} // El segundo (Informática Forense) va al revés
               />
             ))}
           </div>
@@ -66,22 +67,33 @@ const Services: React.FC = () => {
 
         {/* Desarrollo Web Profesional */}
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Desarrollo Web Profesional
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Desarrollo Web Profesional
+            </span>
           </h3>
-          <p className="text-gray-400 mb-8 max-w-2xl">
+
+          <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-16">
             Creamos experiencias web excepcionales que impulsan tu presencia digital y conectan con tu audiencia.
           </p>
 
-          {/* Grid responsivo: 1 columna en móvil, 2 en md, 3 en lg */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Servicios web - uno por fila, intercalados */}
+          <div className="space-y-12">
             {web.map((service, idx) => (
               <ServiceCard
                 key={service.id}
                 title={service.title}
                 description={service.description}
                 image={service.image}
-                index={idx + avanzadas.length} // para que los íconos sigan variando
+                icon={service.icon}
+                isReversed={idx % 2 === 1} // Alterna cada servicio
               />
             ))}
           </div>
