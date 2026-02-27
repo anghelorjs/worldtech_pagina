@@ -3,6 +3,23 @@ import React from 'react';
 import Container from '../common/Container';
 import ServiceCard from '../common/ServiceCard';
 import { services } from '../../data/services';
+import {
+  CodeIcon,
+  SearchIcon,
+  LayoutIcon,
+  UserIcon,
+  ShoppingCartIcon,
+  BookIcon,
+} from '../../assets/icons';
+
+const iconMap: Record<string, React.ReactNode> = {
+  CodeIcon: <CodeIcon />,
+  SearchIcon: <SearchIcon />,
+  LayoutIcon: <LayoutIcon />,
+  UserIcon: <UserIcon />,
+  ShoppingCartIcon: <ShoppingCartIcon />,
+  BookIcon: <BookIcon />,
+};
 
 const Services: React.FC = () => {
   const avanzadas = services.filter(s => s.category === 'avanzadas');
@@ -50,7 +67,6 @@ const Services: React.FC = () => {
             Servicios especializados para empresas que requieren soluciones tecnológicas de alta complejidad.
           </p>
 
-          {/* Servicios avanzados - uno por fila, intercalados */}
           <div className="space-y-12">
             {avanzadas.map((service, idx) => (
               <ServiceCard
@@ -58,8 +74,8 @@ const Services: React.FC = () => {
                 title={service.title}
                 description={service.description}
                 image={service.image}
-                icon={service.icon}
-                isReversed={idx % 2 === 1} // El segundo (Informática Forense) va al revés
+                icon={iconMap[service.icon]}
+                isReversed={idx % 2 === 1}
               />
             ))}
           </div>
@@ -84,7 +100,6 @@ const Services: React.FC = () => {
             Creamos experiencias web excepcionales que impulsan tu presencia digital y conectan con tu audiencia.
           </p>
 
-          {/* Servicios web - uno por fila, intercalados */}
           <div className="space-y-12">
             {web.map((service, idx) => (
               <ServiceCard
@@ -92,8 +107,8 @@ const Services: React.FC = () => {
                 title={service.title}
                 description={service.description}
                 image={service.image}
-                icon={service.icon}
-                isReversed={idx % 2 === 1} // Alterna cada servicio
+                icon={iconMap[service.icon]}
+                isReversed={idx % 2 === 1}
               />
             ))}
           </div>
