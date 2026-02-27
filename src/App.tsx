@@ -3,7 +3,7 @@ import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import CurveSeparator from './components/common/CurveSeparator';
-import './assets/images/wave-haikei.png';
+import Services from './components/sections/Services';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
           <Hero />
           <CurveSeparator />
           <About />
+          <Services />
         </main>
       </div>
     </ThemeProvider>
