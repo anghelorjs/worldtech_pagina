@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
             </h1>
             <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto md:mx-0">
               Transformamos tus ideas en soluciones tecnológicas innovadoras, 
-              optimizando procesos y maximizando tu productividad.
+              optimizando procesos y maximizando tu productividad gaa.
             </p>
             <div className="mt-14 flex justify-center md:justify-center">
               <div className="relative">
