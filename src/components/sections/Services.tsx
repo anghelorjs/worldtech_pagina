@@ -1,17 +1,17 @@
+// src/components/sections/Services.tsx
 import React from 'react';
 import Container from '../common/Container';
 import ServiceCard from '../common/ServiceCard';
 import { services } from '../../data/services';
 
 const Services: React.FC = () => {
-  // Filtrar servicios por categoría
   const avanzadas = services.filter(s => s.category === 'avanzadas');
   const web = services.filter(s => s.category === 'web');
 
   return (
-    <section id="servicios" className="py-20" style={{ backgroundColor: '#000000' }}>
+    <section id="servicios" className="py-20 bg-black">
       <Container>
-        {/* Título principal */}
+        {/* Título principal: Nuestros Servicios */}
         <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-6">
           <span className="text-white">Nuestros</span>{' '}
           <span
@@ -26,40 +26,39 @@ const Services: React.FC = () => {
           </span>
         </h2>
 
-        {/* Párrafo descriptivo */}
         <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-16">
           Ofrecemos una amplia gama de servicios tecnológicos y de desarrollo web para 
           satisfacer todas las necesidades digitales de tu empresa.
         </p>
 
-        {/* Título principal */}
-        <h3 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-6">
-          <span
-            style={{
-              background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Soluciones Tecnológicas Avanzadas
-          </span>
-        </h3>
-
-
         {/* Soluciones Tecnológicas Avanzadas */}
         <div className="mb-20">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Soluciones Tecnológicas Avanzadas
+            </span>
+          </h3>
+
           <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-16">
             Servicios especializados para empresas que requieren soluciones tecnológicas de alta complejidad.
           </p>
-          
-          {/* Grid de 2 columnas para servicios avanzados */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {avanzadas.map((service) => (
+
+          {/* Tarjetas de servicios avanzados - UNA POR FILA (según diseño) */}
+          <div className="space-y-8">
+            {avanzadas.map((service, idx) => (
               <ServiceCard
                 key={service.id}
                 title={service.title}
                 description={service.description}
+                image={service.image}
+                index={idx}
               />
             ))}
           </div>
@@ -73,14 +72,16 @@ const Services: React.FC = () => {
           <p className="text-gray-400 mb-8 max-w-2xl">
             Creamos experiencias web excepcionales que impulsan tu presencia digital y conectan con tu audiencia.
           </p>
-          
-          {/* Grid de 3 columnas en desktop, 2 en tablet, 1 en móvil */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {web.map((service) => (
+
+          {/* Grid responsivo: 1 columna en móvil, 2 en md, 3 en lg */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {web.map((service, idx) => (
               <ServiceCard
                 key={service.id}
                 title={service.title}
                 description={service.description}
+                image={service.image}
+                index={idx + avanzadas.length} // para que los íconos sigan variando
               />
             ))}
           </div>
