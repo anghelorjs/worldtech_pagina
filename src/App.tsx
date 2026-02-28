@@ -5,6 +5,7 @@ import About from './components/sections/About';
 import CurveSeparator from './components/common/CurveSeparator';
 import Services from './components/sections/Services';
 import Contact from './components/sections/Contact';
+import Footer from './components/layout/Footer';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <About />
           <Services />
           <Contact />
+          <Footer />
         </main>
       </div>
     </ThemeProvider>

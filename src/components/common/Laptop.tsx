@@ -25,7 +25,7 @@ const Laptop: React.FC<LaptopProps> = ({ logoSrc = logo }) => {
               </div>
               <span className="text-white font-bold drop-shadow-lg">WORLD TECH</span>
             </div>
-            <title>Layer 1</title>
+
           </div>
           <div className="macbody">
             <div className="face-one">

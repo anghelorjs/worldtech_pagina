@@ -37,12 +37,18 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Laptop animada */}
-            <div className="flex justify-center h-[140px] lg:h-[310px]">
+            <div className="flex justify-center h-[140px] lg:h-[350px] pt-10">
               <Laptop />
             </div>
 
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center pt-12">
+                Información de Contacto
+              </h3>
+            </div>
+
             {/* Íconos de contacto */}
-            <div className="flex justify-center pt-0 lg:pt-16">
+            <div className="flex justify-center pt-0 lg:pt-5">
               <ContactIcons 
                 email="technological.world.dev@gmail.com"
                 phone="77575921"
