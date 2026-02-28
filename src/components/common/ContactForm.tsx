@@ -77,6 +77,7 @@ const ContactForm: React.FC = () => {
               <select
                 className="form-content"
                 name="servicio"
+                aria-label="Servicio de Interés"
                 value={formData.servicio}
                 onChange={handleChange}
                 required
