@@ -1,4 +1,3 @@
-// src/components/common/SeparadorWave.tsx
 import React from 'react';
 
 interface SeparadorWaveProps {

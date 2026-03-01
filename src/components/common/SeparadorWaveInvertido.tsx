@@ -1,4 +1,3 @@
-// src/components/common/SeparadorWaveInvertido.tsx
 import React from 'react';
 
 interface SeparadorWaveInvertidoProps {

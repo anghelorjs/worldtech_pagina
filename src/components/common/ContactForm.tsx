@@ -21,10 +21,8 @@ const ContactForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Tu número de WhatsApp (formato internacional sin +)
-    const phoneNumber = '59177575921'; // 591 es el código de Bolivia
+    const phoneNumber = '59177575921'; 
     
-    // Crear un mensaje estructurado con los datos del formulario
     const message = 
       `*Nuevo mensaje de contacto*%0A%0A` +
       `*Nombre:* ${formData.nombre}%0A` +
@@ -33,11 +31,9 @@ const ContactForm: React.FC = () => {
       `*Servicio de interés:* ${getServiceName(formData.servicio)}%0A` +
       `*Mensaje:*%0A${formData.mensaje}`;
     
-    // Abrir WhatsApp con el mensaje
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
-  // Función auxiliar para obtener el nombre del servicio por su ID
   const getServiceName = (serviceId: string) => {
     const service = services.find(s => s.id === serviceId);
     return service ? service.title : 'No especificado';

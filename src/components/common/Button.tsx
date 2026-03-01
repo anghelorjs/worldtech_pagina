@@ -1,9 +1,8 @@
-// src/components/Button.tsx
 import React from 'react';
 import styled from 'styled-components';
 
 interface ButtonProps {
-  href?: string; // Añadimos la prop href
+  href?: string; 
 }
 
 const Button: React.FC<ButtonProps> = ({ href }) => {
@@ -17,7 +16,6 @@ const Button: React.FC<ButtonProps> = ({ href }) => {
     }
   };
 
-  // Si hay href, renderizamos un <a>, si no, un <button>
   const content = (
     <>
       <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

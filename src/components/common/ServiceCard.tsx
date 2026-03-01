@@ -1,4 +1,3 @@
-// src/components/common/ServiceCard.tsx
 import React from 'react';
 import Button from './Button';
 
@@ -59,7 +58,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             <p className="text-gray-200 text-base md:text-lg leading-relaxed mb-8 text-center">
               {description}
             </p>
-            {/* Envuelve el botón en un div flex centrado */}
             <div className="flex justify-center">
               <Button href="#contacto" variant="primary">
                 Comenzar Proyecto

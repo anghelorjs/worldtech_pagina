@@ -31,13 +31,12 @@ const Hero: React.FC = () => {
             </p>
             <div className="mt-14 flex justify-center md:justify-center">
               <div className="relative">
-                {/* Efecto de glow suave y más ancho alrededor del botón */}
                 <div className="absolute -inset-3 rounded-full opacity-30 blur-xl"
                   style={{
                     background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
                   }}
                 />
-                <Button href="#contacto" /> {/* Aquí añadimos el href */}
+                <Button href="#contacto" /> 
               </div>
             </div>
           </div>

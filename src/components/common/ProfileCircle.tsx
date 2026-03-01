@@ -3,7 +3,6 @@ import React from 'react';
 const ProfileCircle: React.FC = () => {
   return (
     <div className="relative h-full w-full flex items-center justify-center">
-      {/* Estilos para las animaciones */}
       <style>{`
         @keyframes orbit {
           from { transform: rotate(0deg); }
@@ -21,9 +20,7 @@ const ProfileCircle: React.FC = () => {
         }
       `}</style>
 
-      {/* Contenedor principal: padding base 10 (2.5rem) y en lg 20 (5rem) */}
       <div className="relative p-10 lg:p-20 border-4 border-dashed rounded-full border-gray-400/50 dark:border-gray-600">
-        {/* Contenedor que orbita (todos los iconos alrededor) */}
         <div className="absolute inset-0 orbit-wrapper">
           {/* Ícono superior izquierdo */}
           <button className="profile_item absolute left-[45px] lg:left-[90px] -top-[4px] lg:-top-[8px] rounded-full bg-cover cursor-pointer border border-gray-400/50 dark:border-gray-600 p-[2px] lg:p-[4px] active:scale-95 hover:scale-95 transition-all duration-500 anti-orbit">
@@ -89,7 +86,6 @@ const ProfileCircle: React.FC = () => {
           </button>
         </div>
 
-        {/* Círculo central con imagen: base 200px, lg 400px */}
         <button className="block w-[200px] h-[200px] lg:w-[400px] lg:h-[400px] p-2 lg:p-3 border-4 rounded-full hover:border-gray-400/50 dark:hover:border-gray-500 cursor-pointer transition-all duration-500 z-10 overflow-hidden">
           <img
             src="/src/assets/images/profile-central.png"

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../../assets/images/logo-light.png'; // ajusta la ruta a tu logo
+import logo from '../../assets/images/logo-light.png';
 
 interface LaptopProps {
   logoSrc?: string;
@@ -15,7 +15,6 @@ const Laptop: React.FC<LaptopProps> = ({ logoSrc = logo }) => {
             <div className="face-one">
               <div className="camera" />
               <div className="display">
-                {/* Logo en la pantalla */}
                 <img
                   src={logoSrc}
                   alt="Logo"

@@ -13,7 +13,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Cerrar menú al hacer clic en un enlace
   const handleLinkClick = () => {
     setIsMenuOpen(false);
   };
@@ -67,7 +66,6 @@ const Navbar: React.FC = () => {
             {/* Botón de tema */}
             <ThemeToggle />
 
-            {/* Botón hamburguesa - visible solo en móvil */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors"
@@ -91,7 +89,6 @@ const Navbar: React.FC = () => {
                   />
                 </svg>
               ) : (
-                // SVG de hamburguesa (3 líneas)
                 <svg 
                   width="24" 
                   height="24" 
@@ -139,7 +136,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Overlay oscuro cuando el menú está abierto */}
       {isMenuOpen && (
         <div 
           className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm -z-10"

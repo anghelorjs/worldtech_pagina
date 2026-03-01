@@ -26,7 +26,6 @@ const defaultIcons = [
   </svg>,
 ];
 
-// Styles injected once
 const styleTag = `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@400;500&display=swap');
 
@@ -135,7 +134,6 @@ const styleTag = `
 let styleInjected = false;
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, index = 0 }) => {
-  // Inject styles once
   if (typeof document !== 'undefined' && !styleInjected) {
     const el = document.createElement('style');
     el.textContent = styleTag;

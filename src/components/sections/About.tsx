@@ -2,7 +2,7 @@ import React from 'react';
 import Container from '../common/Container';
 import ProfileCircle from '../common/ProfileCircle';
 import FeatureCard from '../common/FeatureCard';
-import StatsCarousel from '../common/StatItem';   // ← default export is the carousel
+import StatsCarousel from '../common/StatItem';   
 import SocialCard from '../common/SocialCard';
 
 const About: React.FC = () => {

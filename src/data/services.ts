@@ -1,14 +1,12 @@
-// src/data/services.ts
 export interface Service {
   id: string;
   title: string;
   description: string;
   category: 'avanzadas' | 'web';
-  icon: string; // Identificador del icono
+  icon: string; 
   image: string;
 }
 
-// Importa tus SVGs (ajusta las rutas según tu proyecto)
 export const services: Service[] = [
   {
     id: 'sistemas-personalizados',

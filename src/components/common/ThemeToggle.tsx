@@ -11,7 +11,6 @@ const ThemeToggle: React.FC = () => {
       aria-label="Cambiar tema"
     >
       {theme === 'light' ? (
-        // SVG de luna (para modo oscuro)
         <svg 
           width="20" 
           height="20" 
@@ -28,7 +27,6 @@ const ThemeToggle: React.FC = () => {
           />
         </svg>
       ) : (
-        // SVG de sol (para modo claro)
         <svg 
           width="20" 
           height="20" 

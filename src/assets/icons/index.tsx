@@ -1,4 +1,3 @@
-// src/assets/icons/index.tsx
 import React from 'react';
 
 export const CodeIcon: React.FC = () => (
