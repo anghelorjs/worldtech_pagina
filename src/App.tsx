@@ -6,17 +6,31 @@ import CurveSeparator from './components/common/CurveSeparator';
 import Services from './components/sections/Services';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
+import SeparadorWaveAzul from './components/common/SeparadorWaveAzul';
+import SeparadorWaveNegro from './components/common/SeparadorWaveNegro';
+import SeparadorWaveInvertido from './components/common/SeparadorWaveInvertido';
 
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-black text-white">
+      <div className="relative min-h-screen bg-black text-white">
         <Header />
         <main>
           <Hero />
-          <CurveSeparator />
+          {/* Contenedor relativo para el separador */}
+          <div className="relative">
+            <SeparadorWaveInvertido fillColor="#000000" />
+          </div>
           <About />
+          {/* Contenedor relativo para el separador */}
+          <div className="relative">
+            <SeparadorWaveAzul />
+          </div>
           <Services />
+          {/* Contenedor relativo para el separador */}
+          <div className="relative">
+            <SeparadorWaveNegro />
+          </div>
           <Contact />
           <Footer />
         </main>

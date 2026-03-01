@@ -198,6 +198,7 @@ const ContactForm: React.FC = () => {
 
 const StyledWrapper = styled.div`
   width: 100%;
+  overflow: hidden;
 
   #Container {
     display: flex;
@@ -227,6 +228,8 @@ const StyledWrapper = styled.div`
     backdrop-filter: blur(10px);
     gap: 1em;
     width: 100%;
+    max-width: 100%;        /* ← NUEVA LÍNEA */
+    box-sizing: border-box; /* ← NUEVA LÍNEA */
   }
 
   #login-lable {
@@ -350,6 +353,7 @@ const StyledWrapper = styled.div`
   @media (max-width: 768px) {
     .form {
       padding: 1.5rem;
+      width: 100%;
     }
 
     #login-lable {

@@ -26,7 +26,7 @@ const Services: React.FC = () => {
   const web = services.filter(s => s.category === 'web');
 
   return (
-    <section id="servicios" className="py-20 bg-black">
+    <section id="servicios" className="py-40 bg-black">
       <Container>
         {/* Título principal: Nuestros Servicios */}
         <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-6">

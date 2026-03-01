@@ -23,8 +23,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
   return (
     <div className="w-full bg-black-900/40 rounded-3xl overflow-hidden border border-white-800/50 backdrop-blur-sm">
-      <div className="flex flex-col md:flex-row min-h-[500px] md:min-h-[450px]">
-        <div className={`relative w-full md:w-[70%] ${imageColumnOrder}`}>
+      <div className="flex flex-col md:flex-row min-h-[500px] md:min-h-[450px] h-[500px] md:h-auto">
+        <div className={`relative w-full h-[50%] md:h-auto md:w-[70%] ${imageColumnOrder}`}>
           <div className="absolute inset-0">
             <img 
               src={image} 
@@ -55,13 +55,16 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         <div className="hidden md:block w-px bg-gradient-to-b from-transparent via-gray-700 to-transparent my-8" />
 
         <div className={`flex-1 flex flex-col justify-center p-8 md:p-12 ${contentColumnOrder}`}>
-          <div className="max-w-md mx-auto md:mx-0">
+          <div className="max-w-md mx-auto">
             <p className="text-gray-200 text-base md:text-lg leading-relaxed mb-8 text-center">
               {description}
             </p>
-            <Button href="#contacto" variant="primary">
-              Comenzar Proyecto
-            </Button>
+            {/* Envuelve el botón en un div flex centrado */}
+            <div className="flex justify-center">
+              <Button href="#contacto" variant="primary">
+                Comenzar Proyecto
+              </Button>
+            </div>
           </div>
         </div>
       </div>

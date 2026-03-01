@@ -30,10 +30,10 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="sobre-nosotros" className="pt-0 pb-20" style={{ backgroundColor: '#081022' }}>
+    <section id="sobre-nosotros" className="pt-40 pb-20" style={{ backgroundColor: '#081022' }}>
       <Container>
         {/* Título */}
-        <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-8">
+        <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-8 -mt-10">
           <span className="text-white">Sobre</span>{' '}
           <span
             style={{
@@ -70,7 +70,7 @@ const About: React.FC = () => {
         </div>
 
         {/* Redes sociales */}
-        <div className="flex justify-center">
+        <div className="flex justify-center text-center">
           <SocialCard />
         </div>
       </Container>

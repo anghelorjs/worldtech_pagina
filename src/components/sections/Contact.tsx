@@ -6,7 +6,7 @@ import ContactForm from '../common/ContactForm';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contacto" className="py-20" style={{ backgroundColor: '#081022' }}>
+    <section id="contacto" className="py-40" style={{ backgroundColor: '#081022' }}>
       <Container>
         {/* Título principal */}
         <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-16">
@@ -23,7 +23,7 @@ const Contact: React.FC = () => {
         </h2>
 
         {/* Contenido de dos columnas */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start -mb-20">
           {/* Columna izquierda - Texto y elementos visuales */}
           <div className="space-y-8">
             <div>
@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Columna derecha - Formulario */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="w-full flex justify-center lg:justify-end overflow-hidden">
             <ContactForm />
           </div>
         </div>
