@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/src/assets/images/logo-light.png" 
+              src="/src/assets/images/logo-light.webp" 
               alt="Technological World" 
               className="h-10 w-auto"
             />

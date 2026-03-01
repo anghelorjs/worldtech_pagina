@@ -88,7 +88,7 @@ const ProfileCircle: React.FC = () => {
 
         <button className="block w-[200px] h-[200px] lg:w-[400px] lg:h-[400px] p-2 lg:p-3 border-4 rounded-full hover:border-gray-400/50 dark:hover:border-gray-500 cursor-pointer transition-all duration-500 z-10 overflow-hidden">
           <img
-            src="/src/assets/images/profile-central.png"
+            src="/src/assets/images/profile-central.webp"
             alt="Central profile"
             className="w-full h-full rounded-full object-cover active:scale-95 hover:scale-95 transition-all duration-500"
           />

@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
           <div className="flex-1 flex justify-end">
             <div className="relative">
               <img
-                src="/src/assets/images/hero-image.png"
+                src="/src/assets/images/hero-image.webp"
                 alt="Tecnología"
                 className="w-full max-w-md md:max-w-lg lg:min-w-xl relative z-10"
                 style={{

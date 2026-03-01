@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
           {/* Logo */}
           <div className="flex justify-center lg:justify-center">
             <img 
-              src="/src/assets/images/logo-light.png" 
+              src="/src/assets/images/logo-light.webp" 
               alt="Technological World" 
               className="h-40 w-auto"
             />

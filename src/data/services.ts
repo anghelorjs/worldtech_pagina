@@ -14,7 +14,7 @@ export const services: Service[] = [
     description: 'Desarrollo de sistemas web robustos y escalables diseñados para optimizar los procesos empresariales y mejorar la productividad.',
     category: 'avanzadas',
     icon: 'CodeIcon',
-    image: '/src/assets/images/service-bg-1.jpeg',
+    image: '/src/assets/images/service-bg-1.webp',
   },
   {
     id: 'informatica-forense',
@@ -22,7 +22,7 @@ export const services: Service[] = [
     description: 'Análisis especializado de evidencia digital, recuperación de datos e investigaciones cibernéticas para empresas y organizaciones.',
     category: 'avanzadas',
     icon: 'SearchIcon',
-    image: '/src/assets/images/service-bg-2.jpeg',
+    image: '/src/assets/images/service-bg-2.webp',
   },
   {
     id: 'landing-pages',
@@ -30,7 +30,7 @@ export const services: Service[] = [
     description: 'Diseñamos páginas de aterrizaje estratégicamente optimizadas para maximizar la conversión de visitantes en clientes.',
     category: 'web',
     icon: 'LayoutIcon',
-    image: '/src/assets/images/service-bg-3.jpeg',
+    image: '/src/assets/images/service-bg-3.webp',
   },
   {
     id: 'portafolios-profesionales',
@@ -38,7 +38,7 @@ export const services: Service[] = [
     description: 'Diseñamos portafolios digitales completamente personalizados que funcionan como tu vitrina profesional en línea.',
     category: 'web',
     icon: 'UserIcon',
-    image: '/src/assets/images/service-bg-4.jpeg',
+    image: '/src/assets/images/service-bg-4.webp',
   },
   {
     id: 'e-commerce',
@@ -46,7 +46,7 @@ export const services: Service[] = [
     description: 'Impulsamos tu negocio con tiendas online listas para vender, diseñadas para ofrecer una experiencia de compra segura y sin complicaciones.',
     category: 'web',
     icon: 'ShoppingCartIcon',
-    image: '/src/assets/images/service-bg-5.jpeg',
+    image: '/src/assets/images/service-bg-5.webp',
   },
   {
     id: 'catalogos-digitales',
@@ -54,6 +54,6 @@ export const services: Service[] = [
     description: 'Catálogos interactivos modernos que muestran tus productos de manera atractiva, profesional y visualmente impactante.',
     category: 'web',
     icon: 'BookIcon',
-    image: '/src/assets/images/service-bg-6.jpeg',
+    image: '/src/assets/images/service-bg-6.webp',
   },
 ];
