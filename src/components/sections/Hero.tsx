@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
                     background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
                   }}
                 />
-                <Button />
+                <Button href="#contacto" /> {/* Aquí añadimos el href */}
               </div>
             </div>
           </div>

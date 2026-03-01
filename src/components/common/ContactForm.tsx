@@ -20,9 +20,27 @@ const ContactForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = `Nuevo contacto: ${formData.nombre} - ${formData.servicio}`;
-    const body = `Nombre: ${formData.nombre}%0D%0ACorreo: ${formData.email}%0D%0ATéléfono: ${formData.telefono}%0D%0AServicio: ${formData.servicio}%0D%0AMensaje: ${formData.mensaje}`;
-    window.location.href = `mailto:technological.world.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    
+    // Tu número de WhatsApp (formato internacional sin +)
+    const phoneNumber = '59177575921'; // 591 es el código de Bolivia
+    
+    // Crear un mensaje estructurado con los datos del formulario
+    const message = 
+      `*Nuevo mensaje de contacto*%0A%0A` +
+      `*Nombre:* ${formData.nombre}%0A` +
+      `*Email:* ${formData.email}%0A` +
+      `*Teléfono:* ${formData.telefono || 'No proporcionado'}%0A` +
+      `*Servicio de interés:* ${getServiceName(formData.servicio)}%0A` +
+      `*Mensaje:*%0A${formData.mensaje}`;
+    
+    // Abrir WhatsApp con el mensaje
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
+
+  // Función auxiliar para obtener el nombre del servicio por su ID
+  const getServiceName = (serviceId: string) => {
+    const service = services.find(s => s.id === serviceId);
+    return service ? service.title : 'No especificado';
   };
 
   return (

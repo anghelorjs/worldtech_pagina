@@ -2,56 +2,89 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = () => {
+interface ButtonProps {
+  href?: string; // Añadimos la prop href
+}
+
+const Button: React.FC<ButtonProps> = ({ href }) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (href?.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  // Si hay href, renderizamos un <a>, si no, un <button>
+  const content = (
+    <>
+      <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+      </svg>
+      <div className="txt-wrapper">
+        <div className="txt-1">
+          <span className="btn-letter">C</span>
+          <span className="btn-letter">o</span>
+          <span className="btn-letter">m</span>
+          <span className="btn-letter">e</span>
+          <span className="btn-letter">n</span>
+          <span className="btn-letter">z</span>
+          <span className="btn-letter">a</span>
+          <span className="btn-letter">r</span>
+          <span className="btn-letter">&nbsp;</span>
+          <span className="btn-letter">P</span>
+          <span className="btn-letter">r</span>
+          <span className="btn-letter">o</span>
+          <span className="btn-letter">y</span>
+          <span className="btn-letter">e</span>
+          <span className="btn-letter">c</span>
+          <span className="btn-letter">t</span>
+          <span className="btn-letter">o</span>
+        </div>
+        <div className="txt-2">
+          <span className="btn-letter">C</span>
+          <span className="btn-letter">o</span>
+          <span className="btn-letter">n</span>
+          <span className="btn-letter">t</span>
+          <span className="btn-letter">a</span>
+          <span className="btn-letter">c</span>
+          <span className="btn-letter">t</span>
+          <span className="btn-letter">a</span>
+          <span className="btn-letter">n</span>
+          <span className="btn-letter">d</span>
+          <span className="btn-letter">o</span>
+          <span className="btn-letter">.</span>
+          <span className="btn-letter">.</span>
+          <span className="btn-letter">.</span>
+        </div>
+      </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <StyledWrapper>
+        <div className="btn-wrapper">
+          <a href={href} onClick={handleClick} className="btn">
+            {content}
+          </a>
+        </div>
+      </StyledWrapper>
+    );
+  }
+
   return (
     <StyledWrapper>
       <div className="btn-wrapper">
         <button className="btn">
-          <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-          </svg>
-          <div className="txt-wrapper">
-            <div className="txt-1">
-              <span className="btn-letter">C</span>
-              <span className="btn-letter">o</span>
-              <span className="btn-letter">m</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">n</span>
-              <span className="btn-letter">z</span>
-              <span className="btn-letter">a</span>
-              <span className="btn-letter">r</span>
-              <span className="btn-letter">&nbsp;</span>
-              <span className="btn-letter">P</span>
-              <span className="btn-letter">r</span>
-              <span className="btn-letter">o</span>
-              <span className="btn-letter">y</span>
-              <span className="btn-letter">e</span>
-              <span className="btn-letter">c</span>
-              <span className="btn-letter">t</span>
-              <span className="btn-letter">o</span>
-            </div>
-            <div className="txt-2">
-              <span className="btn-letter">C</span>
-              <span className="btn-letter">o</span>
-              <span className="btn-letter">n</span>
-              <span className="btn-letter">t</span>
-              <span className="btn-letter">a</span>
-              <span className="btn-letter">c</span>
-              <span className="btn-letter">t</span>
-              <span className="btn-letter">a</span>
-              <span className="btn-letter">n</span>
-              <span className="btn-letter">d</span>
-              <span className="btn-letter">o</span>
-              <span className="btn-letter">.</span>
-              <span className="btn-letter">.</span>
-              <span className="btn-letter">.</span>
-            </div>
-          </div>
+          {content}
         </button>
       </div>
     </StyledWrapper>
   );
-}
+};
 
 const StyledWrapper = styled.div`
   .btn-wrapper {
