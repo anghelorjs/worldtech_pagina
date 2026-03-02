@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../hooks/useTheme';
 
 interface QuickLinksProps {
   links: { name: string; href: string }[];
 }
 
 const QuickLinks: React.FC<QuickLinksProps> = ({ links }) => {
+  const { theme } = useTheme();
+
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={theme} totalLinks={links.length}>
       <div className="radio-container lg:text-center text-center">
         {links.map((link, index) => (
           <React.Fragment key={link.name}>
@@ -30,10 +33,10 @@ const QuickLinks: React.FC<QuickLinksProps> = ({ links }) => {
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ theme: string; totalLinks: number }>`
   .radio-container {
     --main-color: #FF1FA7;
-    --main-color-opacity: rgba(255, 31, 167, 0.1);
+    --main-color-opacity: rgba(255, 31, 167, ${props => props.theme === 'dark' ? '0.1' : '0.2'});
     --total-radio: 4;
 
     display: flex;
@@ -54,18 +57,17 @@ const StyledWrapper = styled.div`
     left: 0;
     top: 0;
     bottom: 0;
-    background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(27, 27, 27, 1) 50%,
-      rgba(0, 0, 0, 0) 100%
-    );
+    background: ${props => props.theme === 'dark'
+      ? 'linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(27, 27, 27, 1) 50%, rgba(0, 0, 0, 0) 100%)'
+      : 'linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(200, 200, 200, 1) 50%, rgba(0, 0, 0, 0) 100%)'
+    };
     width: 1px;
   }
   
   .radio-container .glider-container .glider {
     position: relative;
     height: calc(100% / var(--total-radio));
+    --total-radio: ${({ totalLinks }) => totalLinks};
     width: 100%;
     background: linear-gradient(
       0deg,
@@ -104,7 +106,7 @@ const StyledWrapper = styled.div`
     cursor: pointer;
     padding: 0.75rem 1rem;
     position: relative;
-    color: grey;
+    color: ${props => props.theme === 'dark' ? 'grey' : '#666'};
     transition: all 0.3s ease-in-out;
   }
 
@@ -118,9 +120,10 @@ const StyledWrapper = styled.div`
     color: var(--main-color);
   }
 
-  ${links => {
+  /* REEMPLAZA el bloque problemático por: */
+  ${({ totalLinks }) => {
     let styles = '';
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < totalLinks; i++) {
       styles += `
         .radio-container input:nth-of-type(${i + 1}):checked ~ .glider-container .glider {
           transform: translateY(${i * 100}%);

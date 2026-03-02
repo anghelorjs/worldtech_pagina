@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
     <footer 
       className="py-12 transition-colors duration-300"
       style={{ 
-        backgroundColor: theme === 'dark' ? '#000000' : '#FCFCFD'
+        backgroundColor: theme === 'dark' ? '#000000' : '#DAF5FF'
       }}
     >
       <Container>
@@ -87,7 +87,7 @@ const Footer: React.FC = () => {
 
         {/* Línea divisoria y derechos reservados */}
         <div className={`border-t pt-8 ${
-          theme === 'dark' ? 'border-gray-800' : 'border-gray-200'
+          theme === 'dark' ? 'border-gray-800' : 'border-gray-400'
         }`}>
           <p className={`text-center text-sm ${
             theme === 'dark' ? 'text-gray-400' : 'text-gray-600'

@@ -38,7 +38,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               className="w-full h-full object-cover"
             />
             <div className={`absolute inset-0 ${
-              theme === 'dark' ? 'bg-black/65' : 'bg-black/40'
+              theme === 'dark' ? 'bg-black/75' : 'bg-black/40'
             }`} />
           </div>
 
@@ -73,7 +73,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         <div className={`flex-1 flex flex-col justify-center p-8 md:p-12 ${contentColumnOrder}`}>
           <div className="max-w-md mx-auto">
             <p className={`text-base md:text-lg leading-relaxed mb-8 text-center ${
-              theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
+              theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
             }`}>
               {description}
             </p>

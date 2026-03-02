@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../hooks/useTheme';
 
 interface ServiceLinksProps {
   services: { name: string; href: string }[];
 }
 
 const ServiceLinks: React.FC<ServiceLinksProps> = ({ services }) => {
+  const { theme } = useTheme();
+
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={theme}>
       <div className="radio-container lg:text-center text-center">
         {services.map((service, index) => (
           <React.Fragment key={service.name}>
@@ -30,10 +33,10 @@ const ServiceLinks: React.FC<ServiceLinksProps> = ({ services }) => {
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ theme: string }>`
   .radio-container {
     --main-color: #00F0FF;
-    --main-color-opacity: rgba(0, 240, 255, 0.1);
+    --main-color-opacity: rgba(0, 240, 255, ${props => props.theme === 'dark' ? '0.1' : '0.2'});
     --total-radio: 4;
 
     display: flex;
@@ -54,12 +57,10 @@ const StyledWrapper = styled.div`
     left: 0;
     top: 0;
     bottom: 0;
-    background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(27, 27, 27, 1) 50%,
-      rgba(0, 0, 0, 0) 100%
-    );
+    background: ${props => props.theme === 'dark'
+      ? 'linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(27, 27, 27, 1) 50%, rgba(0, 0, 0, 0) 100%)'
+      : 'linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(200, 200, 200, 1) 50%, rgba(0, 0, 0, 0) 100%)'
+    };
     width: 1px;
   }
   
@@ -104,7 +105,7 @@ const StyledWrapper = styled.div`
     cursor: pointer;
     padding: 0.75rem 1rem;
     position: relative;
-    color: grey;
+    color: ${props => props.theme === 'dark' ? 'grey' : '#666'};
     transition: all 0.3s ease-in-out;
   }
 

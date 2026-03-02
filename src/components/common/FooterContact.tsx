@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../hooks/useTheme';
 
 interface FooterContactProps {
   email: string;
@@ -8,8 +9,10 @@ interface FooterContactProps {
 }
 
 const FooterContact: React.FC<FooterContactProps> = ({ email, phone, location }) => {
+  const { theme } = useTheme();
+
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={theme}>
       <div className="card">
         <ul>
           <li className="iso-pro">
@@ -51,7 +54,7 @@ const FooterContact: React.FC<FooterContactProps> = ({ email, phone, location })
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ theme: string }>`
   .card {
     max-width: fit-content;
     border-radius: 15px;
@@ -61,16 +64,20 @@ const StyledWrapper = styled.div`
     justify-content: center;
     gap: 1rem;
     backdrop-filter: blur(15px);
-    box-shadow: inset 0 0 20px rgba(255, 31, 167, 0.1),
-                inset 0 0 5px rgba(0, 240, 255, 0.1),
-                0 5px 5px rgba(0, 0, 0, 0.164);
+    box-shadow: ${props => props.theme === 'dark'
+      ? 'inset 0 0 20px rgba(255, 31, 167, 0.1), inset 0 0 5px rgba(0, 240, 255, 0.1), 0 5px 5px rgba(0, 0, 0, 0.164)'
+      : 'inset 0 0 20px rgba(255, 31, 167, 0.05), inset 0 0 5px rgba(0, 240, 255, 0.05), 0 5px 15px rgba(0, 0, 0, 0.1)'
+    };
     transition: 0.5s;
     background: transparent;
   }
 
   .card:hover {
     animation: ease-out 5s;
-    background: rgba(173, 173, 173, 0.02);
+    background: ${props => props.theme === 'dark'
+      ? 'rgba(173, 173, 173, 0.02)'
+      : 'rgba(255, 255, 255, 0.5)'
+    };
   }
 
   .card ul {
@@ -99,10 +106,14 @@ const StyledWrapper = styled.div`
     border-radius: 100%;
     color: #00F0FF;
     fill: currentColor;
-    box-shadow: inset 0 0 20px rgba(255, 31, 167, 0.2),
-                inset 0 0 5px rgba(0, 240, 255, 0.2),
-                0 5px 5px rgba(0, 0, 0, 0.164);
-    background: rgba(0, 0, 0, 0.3);
+    box-shadow: ${props => props.theme === 'dark'
+      ? 'inset 0 0 20px rgba(255, 31, 167, 0.2), inset 0 0 5px rgba(0, 240, 255, 0.2), 0 5px 5px rgba(0, 0, 0, 0.164)'
+      : 'inset 0 0 20px rgba(255, 31, 167, 0.1), inset 0 0 5px rgba(0, 240, 255, 0.1), 0 5px 10px rgba(0, 0, 0, 0.1)'
+    };
+    background: ${props => props.theme === 'dark'
+      ? 'rgba(0, 0, 0, 0.3)'
+      : 'rgba(255, 255, 255, 0.8)'
+    };
   }
 
   .text {
@@ -142,9 +153,10 @@ const StyledWrapper = styled.div`
     position: absolute;
     color: #FF1FA7;
     border-color: #FF1FA7;
-    box-shadow: inset 0 0 20px rgba(255, 31, 167, 0.2),
-                inset 0 0 5px rgba(0, 240, 255, 0.2),
-                0 5px 5px rgba(0, 0, 0, 0.164);
+    box-shadow: ${props => props.theme === 'dark'
+      ? 'inset 0 0 20px rgba(255, 31, 167, 0.2), inset 0 0 5px rgba(0, 240, 255, 0.2), 0 5px 5px rgba(0, 0, 0, 0.164)'
+      : 'inset 0 0 20px rgba(255, 31, 167, 0.1), inset 0 0 5px rgba(0, 240, 255, 0.1), 0 5px 10px rgba(0, 0, 0, 0.1)'
+    };
     border-radius: 50%;
     transition: all 0.3s;
     height: 50px;
