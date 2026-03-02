@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import LoadingSpinner from './LoadingSpinner'; // Crearemos este componente
+import LoadingSpinner from './LoadingSpinner';
 
 interface LazySectionProps {
   component: React.LazyExoticComponent<React.ComponentType<any>>;

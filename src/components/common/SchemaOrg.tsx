@@ -17,7 +17,7 @@ interface SchemaOrgProps {
     postalCode: string;
     addressCountry: string;
   };
-  sameAs?: string[]; // Redes sociales
+  sameAs?: string[]; 
   price?: string;
   currency?: string;
   areaServed?: string;

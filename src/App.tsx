@@ -7,14 +7,12 @@ import SeparadorWaveAzul from './components/common/SeparadorWaveAzul';
 import SeparadorWaveNegro from './components/common/SeparadorWaveNegro';
 import SEO from './components/common/SEO';
 
-// Componente de carga
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center py-20">
     <div className="w-12 h-12 border-4 border-t-blue-500 border-b-purple-500 border-l-transparent border-r-transparent rounded-full animate-spin"></div>
   </div>
 );
 
-// Lazy load las secciones que no son críticas
 const About = lazy(() => import('./components/sections/About'));
 const Services = lazy(() => import('./components/sections/Services'));
 const Contact = lazy(() => import('./components/sections/Contact'));
@@ -27,7 +25,7 @@ function App() {
       <div className="relative min-h-screen bg-black text-white">
         <Header />
         <main>
-          <Hero /> {/* Hero es crítico, se carga inmediatamente */}
+          <Hero /> 
           
           <div className="relative">
             <SeparadorWaveInvertido/>

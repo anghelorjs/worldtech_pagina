@@ -11,13 +11,11 @@ export const ThemeContext = createContext<ThemeContextProps | undefined>(undefin
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Intenta obtener el tema guardado en localStorage, si no, usa 'dark' por defecto (o 'light')
     const saved = localStorage.getItem('theme') as Theme | null;
-    return saved || 'dark'; // Preferimos dark como predeterminado (según el PDF Dark)
+    return saved || 'dark';
   });
 
   useEffect(() => {
-    // Guardar en localStorage y aplicar clase al <html>
     localStorage.setItem('theme', theme);
     const root = document.documentElement;
     if (theme === 'dark') {
