@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../hooks/useTheme';
 
 const socials = [
   {
@@ -65,8 +66,10 @@ const socials = [
 ];
 
 const SocialCard: React.FC = () => {
+  const { theme } = useTheme();
+
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={theme}>
       <p className="heading">Visítanos en nuestras redes sociales</p>
       <div className="card">
         {socials.map((s) => (
@@ -89,7 +92,7 @@ const SocialCard: React.FC = () => {
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ theme: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,7 +104,7 @@ const StyledWrapper = styled.div`
     font-weight: 500;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(160, 200, 230, 0.55);
+    color: ${props => props.theme === 'dark' ? 'rgba(160, 200, 230, 0.55)' : 'rgba(60, 80, 100, 0.5)'};
     margin-top: -30px;
     margin-bottom: 25px;
   }
@@ -113,10 +116,11 @@ const StyledWrapper = styled.div`
     gap: 10px;
     width: 600px;
     height: 90px;
-    background: #0a1020;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: ${props => props.theme === 'dark' ? '#0a1020' : '#D7E9F0'};
+    border: 1px solid ${props => props.theme === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'};
     border-radius: 50px;
     padding-inline: 20px;
+    box-shadow: ${props => props.theme === 'dark' ? 'none' : '0 4px 20px rgba(0,0,0,0.05)'};
 
     @media (max-width: 640px) {
       width: 100%;
@@ -162,8 +166,8 @@ const StyledWrapper = styled.div`
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.05);
-    border: 1.5px solid rgba(255,255,255,0.1);
+    background: ${props => props.theme === 'dark' ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)'};
+    border: 1.5px solid ${props => props.theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -197,9 +201,9 @@ const StyledWrapper = styled.div`
     bottom: calc(100% + 10px);
     left: 50%;
     transform: translateX(-50%) translateY(4px);
-    background: #111827;
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(200,220,255,0.9);
+    background: ${props => props.theme === 'dark' ? '#111827' : '#ffffff'};
+    border: 1px solid ${props => props.theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'};
+    color: ${props => props.theme === 'dark' ? 'rgba(200,220,255,0.9)' : 'rgba(0,0,0,0.7)'};
     font-family: 'DM Sans', sans-serif;
     font-size: 0.7rem;
     font-weight: 500;
@@ -210,6 +214,7 @@ const StyledWrapper = styled.div`
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: ${props => props.theme === 'dark' ? 'none' : '0 2px 8px rgba(0,0,0,0.1)'};
 
     &::after {
       content: '';
@@ -218,7 +223,7 @@ const StyledWrapper = styled.div`
       left: 50%;
       transform: translateX(-50%);
       border: 5px solid transparent;
-      border-top-color: rgba(255,255,255,0.1);
+      border-top-color: ${props => props.theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'};
     }
   }
 `;

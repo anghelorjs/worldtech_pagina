@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from '../../hooks/useTheme';
 import Container from '../common/Container';
 import ProfileCircle from '../common/ProfileCircle';
 import FeatureCard from '../common/FeatureCard';
@@ -6,6 +7,8 @@ import StatsCarousel from '../common/StatItem';
 import SocialCard from '../common/SocialCard';
 
 const About: React.FC = () => {
+  const { theme } = useTheme();
+  
   const features = [
     {
       title: 'Innovación Constante',
@@ -26,15 +29,23 @@ const About: React.FC = () => {
     { value: '99%',  label: 'Satisfacción del Cliente' },
     { value: '5+',   label: 'Años de Experiencia' },
     { value: '24/7', label: 'Soporte Técnico' },
-    { value: '0',    label: 'Visitas' }, // valor real se inyecta desde localStorage
+    { value: '0',    label: 'Visitas' },
   ];
 
   return (
-    <section id="sobre-nosotros" className="pt-40 pb-20" style={{ backgroundColor: '#081022' }}>
+    <section 
+      id="sobre-nosotros" 
+      className="pt-40 pb-20 transition-colors duration-300"
+      style={{ 
+        backgroundColor: theme === 'dark' ? '#081022' : '#86C7F5'
+      }}
+    >
       <Container>
         {/* Título */}
         <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-8 -mt-10">
-          <span className="text-white">Sobre</span>{' '}
+          <span className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>
+            Sobre
+          </span>{' '}
           <span
             style={{
               background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
@@ -48,7 +59,9 @@ const About: React.FC = () => {
         </h2>
 
         {/* Párrafo */}
-        <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-16">
+        <p className={`text-lg text-center max-w-3xl mx-auto mb-16 ${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+        }`}>
           Somos un equipo apasionado de expertos en tecnología dedicados a transformar ideas innovadoras en soluciones digitales excepcionales.
         </p>
 
@@ -64,7 +77,7 @@ const About: React.FC = () => {
           ))}
         </div>
 
-        {/* Estadísticas en carrusel — ocupa el ancho completo del Container */}
+        {/* Estadísticas en carrusel */}
         <div className="mb-20">
           <StatsCarousel stats={stats} />
         </div>

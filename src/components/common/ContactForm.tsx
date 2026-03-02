@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../hooks/useTheme';
 import { services } from '../../data/services';
 
 const ContactForm: React.FC = () => {
+  const { theme } = useTheme();
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -40,7 +42,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={theme}>
       <div id="Container">
         <form className="form" onSubmit={handleSubmit}>
           <div id="login-lable">Envíanos un mensaje</div>
@@ -210,7 +212,7 @@ const ContactForm: React.FC = () => {
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ theme: string }>`
   width: 100%;
   overflow: hidden;
 
@@ -236,14 +238,18 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    background: rgba(10, 20, 40, 0.8);
+    border: 2px solid ${props => props.theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.1)' 
+      : 'rgba(0, 0, 0, 0.1)'};
+    background: ${props => props.theme === 'dark' 
+      ? 'rgba(10, 20, 40, 0.8)' 
+      : 'rgba(255, 255, 255, 0.8)'};
     box-shadow: 0 0 30px rgba(255, 31, 167, 0.3), 0 0 30px rgba(0, 240, 255, 0.3);
     backdrop-filter: blur(10px);
     gap: 1em;
     width: 100%;
-    max-width: 100%;        /* ← NUEVA LÍNEA */
-    box-sizing: border-box; /* ← NUEVA LÍNEA */
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   #login-lable {
@@ -259,7 +265,6 @@ const StyledWrapper = styled.div`
     margin-bottom: 0.5rem;
   }
 
-  /* Grid de 2 columnas en desktop */
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -277,7 +282,9 @@ const StyledWrapper = styled.div`
   }
 
   .form-group label {
-    color: rgba(255, 255, 255, 0.85);
+    color: ${props => props.theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.85)' 
+      : 'rgba(0, 0, 0, 0.7)'};
     font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -286,12 +293,16 @@ const StyledWrapper = styled.div`
   .form-content {
     height: 2.8em;
     padding: 0 12px;
-    color: white;
+    color: ${props => props.theme === 'dark' ? 'white' : '#1a1a2e'};
     letter-spacing: 1px;
     font-weight: 400;
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid ${props => props.theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.2)' 
+      : 'rgba(0, 0, 0, 0.1)'};
+    background: ${props => props.theme === 'dark' 
+      ? 'rgba(0, 0, 0, 0.3)' 
+      : 'rgba(255, 255, 255, 0.3)'};
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     font-size: 0.9rem;
@@ -308,7 +319,9 @@ const StyledWrapper = styled.div`
 
   select.form-content {
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-image: ${props => props.theme === 'dark'
+      ? 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'%3e%3cpath d=\'M7 10l5 5 5-5z\'/%3e%3c/svg%3e")'
+      : 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'black\'%3e%3cpath d=\'M7 10l5 5 5-5z\'/%3e%3c/svg%3e")'};
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 20px;
@@ -316,8 +329,8 @@ const StyledWrapper = styled.div`
   }
 
   select.form-content option {
-    background-color: #1a1a2e;
-    color: white;
+    background-color: ${props => props.theme === 'dark' ? '#1a1a2e' : '#ffffff'};
+    color: ${props => props.theme === 'dark' ? 'white' : '#1a1a2e'};
   }
 
   .form-content:focus-visible {
@@ -331,7 +344,9 @@ const StyledWrapper = styled.div`
   }
 
   ::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: ${props => props.theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.4)' 
+      : 'rgba(0, 0, 0, 0.3)'};
     font-weight: 300;
   }
 
@@ -357,13 +372,14 @@ const StyledWrapper = styled.div`
 
   .terms {
     font-size: 0.78rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: ${props => props.theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.6)' 
+      : 'rgba(0, 0, 0, 0.5)'};
     text-align: center;
     margin-top: 0.25rem;
     line-height: 1.4;
   }
 
-  /* En móvil: todo en 1 columna */
   @media (max-width: 768px) {
     .form {
       padding: 1.5rem;

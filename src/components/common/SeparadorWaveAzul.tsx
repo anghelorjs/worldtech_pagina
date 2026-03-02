@@ -14,7 +14,7 @@ const SeparadorWave: React.FC<SeparadorWaveProps> = ({
   
   // Determinar el color según el tema si no se proporciona uno personalizado
   // En modo dark: #081022 (azul oscuro), en modo light: #FCFCFD (blanco hueso)
-  const fillColor = customFillColor || (theme === 'dark' ? '#081022' : '#FCFCFD');
+  const fillColor = customFillColor || (theme === 'dark' ? '#081022' : '#86C7F5');
 
   return (
     <div className={`absolute top-0 left-0 w-full leading-none overflow-hidden ${className}`}>

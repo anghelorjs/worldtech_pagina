@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useTheme } from '../../hooks/useTheme';
 
 interface FeatureCardProps {
   title: string;
@@ -8,16 +9,13 @@ interface FeatureCardProps {
 }
 
 const defaultIcons = [
-  // Innovación – lightbulb
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
     <path d="M9 18h6M10 21h4M12 2a7 7 0 0 1 4 12.9V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.1A7 7 0 0 1 12 2z"/>
   </svg>,
-  // Calidad – shield check
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
     <path d="M12 2l7 4v5c0 5-3.5 9.7-7 11-3.5-1.3-7-6-7-11V6l7-4z"/>
     <polyline points="9 12 11 14 15 10"/>
   </svg>,
-  // Compromiso – handshake / users
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
     <circle cx="9" cy="7" r="4"/>
@@ -26,7 +24,7 @@ const defaultIcons = [
   </svg>,
 ];
 
-const styleTag = `
+const styleTag = (theme: string) => `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@400;500&display=swap');
 
   .fc-card {
@@ -72,7 +70,7 @@ const styleTag = `
   }
 
   .fc-inner {
-    background: rgba(8, 16, 34, 0.85);
+    background: ${theme === 'dark' ? 'rgba(8, 16, 34, 0.85)' : 'rgba(255, 255, 255, 0.85)'};
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-radius: 18px;
@@ -106,7 +104,7 @@ const styleTag = `
     font-family: 'Syne', sans-serif;
     font-weight: 700;
     font-size: 1.2rem;
-    color: #fff;
+    color: ${theme === 'dark' ? '#fff' : '#1a1a2e'};
     letter-spacing: -0.01em;
     line-height: 1.25;
   }
@@ -115,7 +113,7 @@ const styleTag = `
     font-family: 'DM Sans', sans-serif;
     font-size: 0.92rem;
     line-height: 1.65;
-    color: rgba(180, 200, 230, 0.75);
+    color: ${theme === 'dark' ? 'rgba(180, 200, 230, 0.75)' : 'rgba(30, 40, 60, 0.8)'};
   }
 
   .fc-line {
@@ -131,32 +129,32 @@ const styleTag = `
   }
 `;
 
-let styleInjected = false;
-
 const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon, index = 0 }) => {
-  if (typeof document !== 'undefined' && !styleInjected) {
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    const id = 'fc-styles';
+    const existing = document.getElementById(id);
+    if (existing) existing.remove();
     const el = document.createElement('style');
-    el.textContent = styleTag;
+    el.id = id;
+    el.textContent = styleTag(theme);
     document.head.appendChild(el);
-    styleInjected = true;
-  }
+  }, [theme]);
 
   const resolvedIcon = icon ?? defaultIcons[index % defaultIcons.length];
 
   return (
-    <>
-      {typeof document === 'undefined' && <style dangerouslySetInnerHTML={{ __html: styleTag }} />}
-      <div className="fc-card">
-        <div className="fc-inner">
-          <div className="fc-icon-wrap">{resolvedIcon}</div>
-          <div>
-            <h3 className="fc-title">{title}</h3>
-            <div className="fc-line" style={{ marginTop: '0.5rem', marginBottom: '0.75rem' }} />
-            <p className="fc-desc">{description}</p>
-          </div>
+    <div className="fc-card">
+      <div className="fc-inner">
+        <div className="fc-icon-wrap">{resolvedIcon}</div>
+        <div>
+          <h3 className="fc-title">{title}</h3>
+          <div className="fc-line" style={{ marginTop: '0.5rem', marginBottom: '0.75rem' }} />
+          <p className="fc-desc">{description}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

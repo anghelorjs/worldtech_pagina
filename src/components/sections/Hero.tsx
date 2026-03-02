@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
     <section 
       id="inicio" 
       className={`min-h-screen flex items-center ${
-        theme === 'dark' ? 'bg-black' : 'bg-gradient-to-br from-gray-50 to-white'
+        theme === 'dark' ? 'bg-black' : 'bg-[#DAF5FF]'
       }`}
     >
       <Container>

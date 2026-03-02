@@ -1,5 +1,5 @@
-// src/components/sections/Services.tsx
 import React from 'react';
+import { useTheme } from '../../hooks/useTheme';
 import Container from '../common/Container';
 import ServiceCard from '../common/ServiceCard';
 import { services } from '../../data/services';
@@ -22,15 +22,24 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 const Services: React.FC = () => {
+  const { theme } = useTheme();
   const avanzadas = services.filter(s => s.category === 'avanzadas');
   const web = services.filter(s => s.category === 'web');
 
   return (
-    <section id="servicios" className="py-40 bg-black">
+    <section 
+      id="servicios" 
+      className="py-40 transition-colors duration-300"
+      style={{ 
+        backgroundColor: theme === 'dark' ? '#000000' : '#DAF5FF'
+      }}
+    >
       <Container>
         {/* Título principal: Nuestros Servicios */}
         <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-6">
-          <span className="text-white">Nuestros</span>{' '}
+          <span className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>
+            Nuestros
+          </span>{' '}
           <span
             style={{
               background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
@@ -43,7 +52,9 @@ const Services: React.FC = () => {
           </span>
         </h2>
 
-        <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-8">
+        <p className={`text-lg text-center max-w-3xl mx-auto mb-8 ${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+        }`}>
           Ofrecemos una amplia gama de servicios tecnológicos y de desarrollo web para 
           satisfacer todas las necesidades digitales de tu empresa.
         </p>
@@ -63,7 +74,9 @@ const Services: React.FC = () => {
             </span>
           </h3>
 
-          <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-16">
+          <p className={`text-lg text-center max-w-3xl mx-auto mb-16 ${
+            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             Servicios especializados para empresas que requieren soluciones tecnológicas de alta complejidad.
           </p>
 
@@ -96,7 +109,9 @@ const Services: React.FC = () => {
             </span>
           </h3>
 
-          <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-16">
+          <p className={`text-lg text-center max-w-3xl mx-auto mb-16 ${
+            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+          }`}>
             Creamos experiencias web excepcionales que impulsan tu presencia digital y conectan con tu audiencia.
           </p>
 

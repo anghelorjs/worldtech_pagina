@@ -97,7 +97,7 @@ const StyledWrapper = styled.div<{ theme: string }>`
     --border-radius: 32px;
     --padding: 4px;
     --transition: 0.4s;
-    --button-color: ${props => props.theme === 'dark' ? '#101010' : '#1C1F64'};
+    --button-color: ${props => props.theme === 'dark' ? '#101010' : '#f0f0ff'};
     --highlight-color-hue: 280deg;
 
     user-select: none;
@@ -214,7 +214,7 @@ const StyledWrapper = styled.div<{ theme: string }>`
   .btn-letter {
     position: relative;
     display: inline-block;
-    color: ${props => props.theme === 'dark' ? '#fff5' : '#0008'};
+    color: ${props => props.theme === 'dark' ? '#fff5' : '#4444aa'};
     animation: letter-anim 2s ease-in-out infinite;
     transition:
       color var(--transition),
@@ -227,9 +227,9 @@ const StyledWrapper = styled.div<{ theme: string }>`
     50% {
       text-shadow: ${props => props.theme === 'dark'
         ? '0 0 3px #fff8'
-        : '0 0 3px #0008'
+        : '0 0 4px rgba(100,100,200,0.5)'
       };
-      color: ${props => props.theme === 'dark' ? '#fff' : '#000'};
+      color: ${props => props.theme === 'dark' ? '#fff' : '#2222aa'};
     }
   }
 
@@ -237,12 +237,12 @@ const StyledWrapper = styled.div<{ theme: string }>`
     height: 26px;
     width: 26px;
     margin-right: 0.8rem;
-    fill: ${props => props.theme === 'dark' ? '#e8e8e8' : '#333'};
+    fill: ${props => props.theme === 'dark' ? '#e8e8e8' : '#5555bb'};
     animation: flicker 2s linear infinite;
     animation-delay: 0.5s;
     filter: ${props => props.theme === 'dark'
       ? 'drop-shadow(0 0 2px #fff9)'
-      : 'drop-shadow(0 0 2px #0009)'
+      : 'drop-shadow(0 0 2px rgba(100,100,200,0.4))'
     };
     transition:
       fill var(--transition),

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../hooks/useTheme';
 
 interface ContactIconsProps {
   email: string;
@@ -8,8 +9,10 @@ interface ContactIconsProps {
 }
 
 const ContactIcons: React.FC<ContactIconsProps> = ({ email, phone, location }) => {
+  const { theme } = useTheme();
+
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={theme}>
       <ul className="example-2">
         <li className="icon-content">
           <a href={`mailto:${email}`} aria-label="Email" data-social="email">
@@ -43,7 +46,7 @@ const ContactIcons: React.FC<ContactIconsProps> = ({ email, phone, location }) =
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ theme: string }>`
   ul {
     list-style: none;
   }
@@ -91,13 +94,15 @@ const StyledWrapper = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    color: #4d4d4d;
-    background-color: #fff;
+    color: ${props => props.theme === 'dark' ? '#4d4d4d' : '#666'};
+    background-color: ${props => props.theme === 'dark' ? '#fff' : '#f0f0f0'};
     transition: all 0.3s ease-in-out;
   }
   
   .example-2 .icon-content a:hover {
-    box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 12%);
+    box-shadow: 3px 2px 45px 0px ${props => props.theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.12)' 
+      : 'rgba(0, 0, 0, 0.12)'};
   }
   
   .example-2 .icon-content a svg {

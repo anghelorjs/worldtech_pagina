@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTheme } from '../../hooks/useTheme';
 
 function useVisitCount(): string {
   const [count, setCount] = useState<string>('...');
@@ -49,7 +50,7 @@ const ICONS = [
   </svg>,
 ];
 
-const css = `
+const css = (theme: string) => `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap');
 
   .sc-root {
@@ -90,7 +91,7 @@ const css = `
     justify-content: space-between;
     padding: 16px 18px;
     position: relative;
-    background: #0c1628;
+    background: ${theme === 'dark' ? '#0c1628' : '#ffffff'};
     border: 1px solid var(--sc-border);
     transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(.22,.68,0,1.2), border-color 0.3s ease;
     overflow: hidden;
@@ -159,14 +160,14 @@ const css = `
     font-size: 1.85rem;
     line-height: 1;
     letter-spacing: -0.01em;
-    color: #ffffff;
+    color: ${theme === 'dark' ? '#ffffff' : '#1a1a2e'};
   }
 
   .sc-label {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.68rem;
     font-weight: 600;
-    color: rgba(160, 185, 220, 0.6);
+    color: ${theme === 'dark' ? 'rgba(160, 185, 220, 0.6)' : 'rgba(60, 80, 100, 0.6)'};
     text-transform: uppercase;
     letter-spacing: 0.07em;
     margin-top: 6px;
@@ -186,8 +187,6 @@ const css = `
     .sc-value { font-size: 1.5rem; }
   }
 `;
-
-let injected = false;
 
 interface StatCardProps {
   value: string;
@@ -225,14 +224,18 @@ interface StatsCarouselProps {
 }
 
 const StatsCarousel: React.FC<StatsCarouselProps> = ({ stats }) => {
+  const { theme } = useTheme();
   const visitCount = useVisitCount();
 
-  if (typeof document !== 'undefined' && !injected) {
+  useEffect(() => {
+    const id = 'sc-styles';
+    const existing = document.getElementById(id);
+    if (existing) existing.remove();
     const el = document.createElement('style');
-    el.textContent = css;
+    el.id = id;
+    el.textContent = css(theme);
     document.head.appendChild(el);
-    injected = true;
-  }
+  }, [theme]);
 
   const resolved = stats.map((s) =>
     s.label.toLowerCase().includes('visita') ? { ...s, value: visitCount } : s
@@ -241,16 +244,13 @@ const StatsCarousel: React.FC<StatsCarouselProps> = ({ stats }) => {
   const doubled = [...resolved, ...resolved];
 
   return (
-    <>
-      {typeof document === 'undefined' && <style dangerouslySetInnerHTML={{ __html: css }} />}
-      <div className="sc-root">
-        <div className="sc-track">
-          {doubled.map((s, i) => (
-            <StatCard key={i} value={s.value} label={s.label} idx={i % resolved.length} />
-          ))}
-        </div>
+    <div className="sc-root">
+      <div className="sc-track">
+        {doubled.map((s, i) => (
+          <StatCard key={i} value={s.value} label={s.label} idx={i % resolved.length} />
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -13,7 +13,7 @@ const SeparadorWaveInvertido: React.FC<SeparadorWaveInvertidoProps> = ({
   const { theme } = useTheme();
   
   // Determinar el color según el tema si no se proporciona uno personalizado
-  const fillColor = customFillColor || (theme === 'dark' ? '#000000' : '#FCFCFD');
+  const fillColor = customFillColor || (theme === 'dark' ? '#000000' : '#DAF5FF');
 
   return (
     <div 

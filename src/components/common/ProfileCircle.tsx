@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTheme } from '../../hooks/useTheme';
 
 const ProfileCircle: React.FC = () => {
+  const { theme } = useTheme();
+
   return (
     <div className="relative h-full w-full flex items-center justify-center">
       <style>{`
@@ -20,7 +23,12 @@ const ProfileCircle: React.FC = () => {
         }
       `}</style>
 
-      <div className="relative p-10 lg:p-20 border-4 border-dashed rounded-full border-gray-400/50 dark:border-gray-600">
+      <div className={`relative p-10 lg:p-20 border-4 border-dashed rounded-full 
+        ${theme === 'dark' 
+          ? 'border-gray-400/50' 
+          : 'border-gray-300'
+        }`}
+      >
         <div className="absolute inset-0 orbit-wrapper">
           {/* Ícono superior izquierdo */}
           <button className="profile_item absolute left-[45px] lg:left-[90px] -top-[4px] lg:-top-[8px] rounded-full bg-cover cursor-pointer border border-gray-400/50 dark:border-gray-600 p-[2px] lg:p-[4px] active:scale-95 hover:scale-95 transition-all duration-500 anti-orbit">
