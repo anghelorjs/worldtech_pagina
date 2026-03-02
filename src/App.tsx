@@ -1,14 +1,24 @@
+import React, { lazy, Suspense } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/layout/Header';
 import Hero from './components/sections/Hero';
-import About from './components/sections/About';
-import Services from './components/sections/Services';
-import Contact from './components/sections/Contact';
-import Footer from './components/layout/Footer';
+import SeparadorWaveInvertido from './components/common/SeparadorWaveInvertido';
 import SeparadorWaveAzul from './components/common/SeparadorWaveAzul';
 import SeparadorWaveNegro from './components/common/SeparadorWaveNegro';
-import SeparadorWaveInvertido from './components/common/SeparadorWaveInvertido';
 import SEO from './components/common/SEO';
+
+// Componente de carga
+const LoadingSpinner = () => (
+  <div className="flex justify-center items-center py-20">
+    <div className="w-12 h-12 border-4 border-t-blue-500 border-b-purple-500 border-l-transparent border-r-transparent rounded-full animate-spin"></div>
+  </div>
+);
+
+// Lazy load las secciones que no son críticas
+const About = lazy(() => import('./components/sections/About'));
+const Services = lazy(() => import('./components/sections/Services'));
+const Contact = lazy(() => import('./components/sections/Contact'));
+const Footer = lazy(() => import('./components/layout/Footer'));
 
 function App() {
   return (
@@ -17,21 +27,36 @@ function App() {
       <div className="relative min-h-screen bg-black text-white">
         <Header />
         <main>
-          <Hero />
+          <Hero /> {/* Hero es crítico, se carga inmediatamente */}
+          
           <div className="relative">
             <SeparadorWaveInvertido/>
           </div>
-          <About />
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <About />
+          </Suspense>
+          
           <div className="relative">
             <SeparadorWaveAzul />
           </div>
-          <Services />
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <Services />
+          </Suspense>
+          
           <div className="relative">
             <SeparadorWaveNegro />
           </div>
-          <Contact />
+          
+          <Suspense fallback={<LoadingSpinner />}>
+            <Contact />
+          </Suspense>
         </main>
-        <Footer />
+        
+        <Suspense fallback={<LoadingSpinner />}>
+          <Footer />
+        </Suspense>
       </div>
     </ThemeProvider>
   );
