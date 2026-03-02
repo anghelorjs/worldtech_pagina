@@ -16,17 +16,14 @@ function App() {
         <Header />
         <main>
           <Hero />
-          {/* Contenedor relativo para el separador */}
           <div className="relative">
             <SeparadorWaveInvertido fillColor="#000000" />
           </div>
           <About />
-          {/* Contenedor relativo para el separador */}
           <div className="relative">
             <SeparadorWaveAzul />
           </div>
           <Services />
-          {/* Contenedor relativo para el separador */}
           <div className="relative">
             <SeparadorWaveNegro />
           </div>
