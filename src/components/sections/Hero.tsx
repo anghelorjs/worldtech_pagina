@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
               <div className="relative">
                 <img
                   src="/src/assets/images/hero-image.webp"
-                  alt="Tecnología"
+                  alt="Tecnología e innovación - Desarrollo de software por Technological World"
                   className="w-full max-w-md md:max-w-lg lg:min-w-xl relative z-10"
                   style={{
                     filter: theme === 'dark'

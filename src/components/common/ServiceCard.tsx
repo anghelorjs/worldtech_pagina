@@ -34,7 +34,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           <div className="absolute inset-0">
             <img 
               src={image} 
-              alt="" 
+              alt={`${title} - Servicio tecnológico de Technological World`}
               className="w-full h-full object-cover"
             />
             <div className={`absolute inset-0 ${
