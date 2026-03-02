@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTheme } from './../../hooks/useTheme';
 
 interface SeparadorWaveProps {
   className?: string;
@@ -7,8 +8,13 @@ interface SeparadorWaveProps {
 
 const SeparadorWave: React.FC<SeparadorWaveProps> = ({ 
   className = '', 
-  fillColor = '#000000' 
+  fillColor: customFillColor 
 }) => {
+  const { theme } = useTheme();
+  
+  // Determinar el color según el tema si no se proporciona uno personalizado
+  const fillColor = customFillColor || (theme === 'dark' ? '#000000' : '#FCFCFD');
+
   return (
     <div className={`absolute top-0 left-0 w-full leading-none overflow-hidden ${className}`}>
       <svg

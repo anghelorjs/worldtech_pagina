@@ -1,10 +1,18 @@
 import React from 'react';
 import Container from '../common/Container';
 import Button from '../common/Button';
+import { useTheme } from '../../hooks/useTheme';
 
 const Hero: React.FC = () => {
+  const { theme } = useTheme();
+
   return (
-    <section id="inicio" className="min-h-screen flex items-center bg-black">
+    <section 
+      id="inicio" 
+      className={`min-h-screen flex items-center ${
+        theme === 'dark' ? 'bg-black' : 'bg-gradient-to-br from-gray-50 to-white'
+      }`}
+    >
       <Container>
         <div className="flex flex-col md:flex-row items-center gap-12 mt-20">
           {/* Columna de texto h1 */}
@@ -21,11 +29,15 @@ const Hero: React.FC = () => {
               >
                 Soluciones Tecnológicas
               </span>
-              <span className="text-white block leading-[1.5]">
+              <span className={`block leading-[1.5] ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
                 Para Impulsar Tu Negocio
               </span>
             </h1>
-            <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto md:mx-0">
+            <p className={`mt-4 text-lg max-w-2xl mx-auto md:mx-0 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
               Transformamos tus ideas en soluciones tecnológicas innovadoras, 
               optimizando procesos y maximizando tu productividad.
             </p>
@@ -48,7 +60,9 @@ const Hero: React.FC = () => {
                 alt="Tecnología"
                 className="w-full max-w-md md:max-w-lg lg:min-w-xl relative z-10"
                 style={{
-                  filter: 'drop-shadow(0 0 25px rgba(255,31,167,0.3)) drop-shadow(0 0 25px rgba(0,240,255,0.3))',
+                  filter: theme === 'dark'
+                    ? 'drop-shadow(0 0 25px rgba(255,31,167,0.3)) drop-shadow(0 0 25px rgba(0,240,255,0.3))'
+                    : 'drop-shadow(0 0 25px rgba(255,31,167,0.2)) drop-shadow(0 0 25px rgba(0,240,255,0.2))',
                 }}
               />
             </div>

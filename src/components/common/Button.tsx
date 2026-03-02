@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../hooks/useTheme';
 
 interface ButtonProps {
   href?: string; 
 }
 
 const Button: React.FC<ButtonProps> = ({ href }) => {
+  const { theme } = useTheme();
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (href?.startsWith('#')) {
       e.preventDefault();
@@ -63,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({ href }) => {
 
   if (href) {
     return (
-      <StyledWrapper>
+      <StyledWrapper theme={theme}>
         <div className="btn-wrapper">
           <a href={href} onClick={handleClick} className="btn">
             {content}
@@ -74,7 +77,7 @@ const Button: React.FC<ButtonProps> = ({ href }) => {
   }
 
   return (
-    <StyledWrapper>
+    <StyledWrapper theme={theme}>
       <div className="btn-wrapper">
         <button className="btn">
           {content}
@@ -84,7 +87,7 @@ const Button: React.FC<ButtonProps> = ({ href }) => {
   );
 };
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div<{ theme: string }>`
   .btn-wrapper {
     position: relative;
     display: inline-block;
@@ -94,7 +97,7 @@ const StyledWrapper = styled.div`
     --border-radius: 32px;
     --padding: 4px;
     --transition: 0.4s;
-    --button-color: #101010;
+    --button-color: ${props => props.theme === 'dark' ? '#101010' : '#1C1F64'};
     --highlight-color-hue: 280deg;
 
     user-select: none;
@@ -111,17 +114,27 @@ const StyledWrapper = styled.div`
     position: relative;
     z-index: 1;
 
-    box-shadow:
-      inset 0px 1px 1px rgba(255, 255, 255, 0.2),
-      inset 0px 2px 2px rgba(255, 255, 255, 0.15),
-      inset 0px 4px 4px rgba(255, 255, 255, 0.1),
-      inset 0px 8px 8px rgba(255, 255, 255, 0.05),
-      inset 0px 16px 16px rgba(255, 255, 255, 0.05),
-      0px -1px 1px rgba(0, 0, 0, 0.02),
-      0px -2px 2px rgba(0, 0, 0, 0.03),
-      0px -4px 4px rgba(0, 0, 0, 0.05),
-      0px -8px 8px rgba(0, 0, 0, 0.06),
-      0px -16px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: ${props => props.theme === 'dark' 
+      ? `
+        inset 0px 1px 1px rgba(255, 255, 255, 0.2),
+        inset 0px 2px 2px rgba(255, 255, 255, 0.15),
+        inset 0px 4px 4px rgba(255, 255, 255, 0.1),
+        inset 0px 8px 8px rgba(255, 255, 255, 0.05),
+        inset 0px 16px 16px rgba(255, 255, 255, 0.05),
+        0px -1px 1px rgba(0, 0, 0, 0.02),
+        0px -2px 2px rgba(0, 0, 0, 0.03),
+        0px -4px 4px rgba(0, 0, 0, 0.05),
+        0px -8px 8px rgba(0, 0, 0, 0.06),
+        0px -16px 16px rgba(0, 0, 0, 0.08)
+      `
+      : `
+        inset 0px 1px 1px rgba(255, 255, 255, 0.5),
+        inset 0px 2px 2px rgba(255, 255, 255, 0.4),
+        inset 0px 4px 4px rgba(255, 255, 255, 0.3),
+        inset 0px 8px 8px rgba(255, 255, 255, 0.2),
+        inset 0px 16px 16px rgba(255, 255, 255, 0.1),
+        0px 2px 4px rgba(0, 0, 0, 0.1)
+    `};
 
     border: solid 2px transparent;
     background-image: linear-gradient(var(--button-color), var(--button-color)), 
@@ -146,18 +159,31 @@ const StyledWrapper = styled.div`
     height: calc(100% + var(--padding) * 2 + 2px);
     border-radius: calc(var(--border-radius) + var(--padding) + 1px);
     pointer-events: none;
-    background-image: linear-gradient(0deg, #0004, #000a);
+    background-image: ${props => props.theme === 'dark' 
+      ? 'linear-gradient(0deg, #0004, #000a)'
+      : 'linear-gradient(0deg, #fff4, #fffa)'
+    };
     z-index: -2;
     transition:
       box-shadow var(--transition),
       filter var(--transition);
-    box-shadow:
-      0 -8px 8px -6px #0000 inset,
-      0 -16px 16px -8px #00000000 inset,
-      1px 1px 1px #fff2,
-      2px 2px 2px #fff1,
-      -1px -1px 1px #0002,
-      -2px -2px 2px #0001;
+    box-shadow: ${props => props.theme === 'dark'
+      ? `
+        0 -8px 8px -6px #0000 inset,
+        0 -16px 16px -8px #00000000 inset,
+        1px 1px 1px #fff2,
+        2px 2px 2px #fff1,
+        -1px -1px 1px #0002,
+        -2px -2px 2px #0001
+      `
+      : `
+        0 -8px 8px -6px #0000 inset,
+        0 -16px 16px -8px #00000000 inset,
+        1px 1px 1px #fff,
+        2px 2px 2px #fff8,
+        -1px -1px 1px #0001,
+        -2px -2px 2px #0000
+    `};
   }
   
   .btn::after {
@@ -188,7 +214,7 @@ const StyledWrapper = styled.div`
   .btn-letter {
     position: relative;
     display: inline-block;
-    color: #fff5;
+    color: ${props => props.theme === 'dark' ? '#fff5' : '#0008'};
     animation: letter-anim 2s ease-in-out infinite;
     transition:
       color var(--transition),
@@ -199,8 +225,11 @@ const StyledWrapper = styled.div`
 
   @keyframes letter-anim {
     50% {
-      text-shadow: 0 0 3px #fff8;
-      color: #fff;
+      text-shadow: ${props => props.theme === 'dark'
+        ? '0 0 3px #fff8'
+        : '0 0 3px #0008'
+      };
+      color: ${props => props.theme === 'dark' ? '#fff' : '#000'};
     }
   }
 
@@ -208,10 +237,13 @@ const StyledWrapper = styled.div`
     height: 26px;
     width: 26px;
     margin-right: 0.8rem;
-    fill: #e8e8e8;
+    fill: ${props => props.theme === 'dark' ? '#e8e8e8' : '#333'};
     animation: flicker 2s linear infinite;
     animation-delay: 0.5s;
-    filter: drop-shadow(0 0 2px #fff9);
+    filter: ${props => props.theme === 'dark'
+      ? 'drop-shadow(0 0 2px #fff9)'
+      : 'drop-shadow(0 0 2px #0009)'
+    };
     transition:
       fill var(--transition),
       filter var(--transition),
@@ -296,8 +328,10 @@ const StyledWrapper = styled.div`
     }
     50% {
       transform: scale(1.5);
-      filter: blur(8px) brightness(150%)
-        drop-shadow(-24px 8px 8px hsl(var(--highlight-color-hue), 100%, 70%));
+      filter: ${props => props.theme === 'dark'
+        ? 'blur(8px) brightness(150%) drop-shadow(-24px 8px 8px hsl(var(--highlight-color-hue), 100%, 70%))'
+        : 'blur(8px) brightness(150%) drop-shadow(-24px 8px 8px hsla(var(--highlight-color-hue), 100%, 30%, 0.5))'
+      };
     }
   }
   
@@ -412,9 +446,11 @@ const StyledWrapper = styled.div`
   }
 
   .btn:hover .btn-svg {
-    fill: #fff;
-    filter: drop-shadow(0 0 3px hsl(var(--highlight-color-hue), 100%, 70%))
-      drop-shadow(0 -4px 6px #0009);
+    fill: ${props => props.theme === 'dark' ? '#fff' : '#000'};
+    filter: ${props => props.theme === 'dark'
+      ? 'drop-shadow(0 0 3px hsl(var(--highlight-color-hue), 100%, 70%)) drop-shadow(0 -4px 6px #0009)'
+      : 'drop-shadow(0 0 3px hsla(var(--highlight-color-hue), 100%, 30%, 0.5)) drop-shadow(0 -4px 6px #0003)'
+    };
     animation: none;
   }
 `;

@@ -1,14 +1,20 @@
 import React from 'react';
+import { useTheme } from '../../hooks/useTheme';
 
 interface SeparadorWaveInvertidoProps {
   className?: string;
-  fillColor?: string;
+  fillColor?: string; // Mantenemos la prop para permitir sobrescribir manualmente
 }
 
 const SeparadorWaveInvertido: React.FC<SeparadorWaveInvertidoProps> = ({ 
   className = '', 
-  fillColor = '#000000' 
+  fillColor: customFillColor 
 }) => {
+  const { theme } = useTheme();
+  
+  // Determinar el color según el tema si no se proporciona uno personalizado
+  const fillColor = customFillColor || (theme === 'dark' ? '#000000' : '#FCFCFD');
+
   return (
     <div 
       className={`absolute top-0 left-0 w-full leading-none overflow-hidden rotate-180 ${className}`}

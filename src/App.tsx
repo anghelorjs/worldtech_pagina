@@ -17,7 +17,7 @@ function App() {
         <main>
           <Hero />
           <div className="relative">
-            <SeparadorWaveInvertido fillColor="#000000" />
+            <SeparadorWaveInvertido/>
           </div>
           <About />
           <div className="relative">
