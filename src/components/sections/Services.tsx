@@ -11,6 +11,8 @@ import {
   ShoppingCartIcon,
   BookIcon,
 } from '../../assets/icons';
+import ServicesSEO from './HeroSEO';
+import SchemaServices from './SchemaServices';
 
 const iconMap: Record<string, React.ReactNode> = {
   CodeIcon: <CodeIcon />,
@@ -27,41 +29,22 @@ const Services: React.FC = () => {
   const web = services.filter(s => s.category === 'web');
 
   return (
-    <section 
-      id="servicios" 
-      className="py-40 transition-colors duration-300"
-      style={{ 
-        backgroundColor: theme === 'dark' ? '#000000' : '#DAF5FF'
-      }}
-    >
-      <Container>
-        {/* Título principal: Nuestros Servicios */}
-        <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-6">
-          <span className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>
-            Nuestros
-          </span>{' '}
-          <span
-            style={{
-              background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Servicios
-          </span>
-        </h2>
-
-        <p className={`text-lg text-center max-w-3xl mx-auto mb-8 ${
-          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-        }`}>
-          Ofrecemos una amplia gama de servicios tecnológicos y de desarrollo web para 
-          satisfacer todas las necesidades digitales de tu empresa.
-        </p>
-
-        {/* Soluciones Tecnológicas Avanzadas */}
-        <div className="mb-20">
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+    <>
+      <ServicesSEO />
+      <SchemaServices />
+      <section 
+        id="servicios" 
+        className="py-40 transition-colors duration-300"
+        style={{ 
+          backgroundColor: theme === 'dark' ? '#000000' : '#DAF5FF'
+        }}
+      >
+        <Container>
+          {/* Título principal: Nuestros Servicios */}
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-center mb-6">
+            <span className={theme === 'dark' ? 'text-white' : 'text-gray-900'}>
+              Nuestros
+            </span>{' '}
             <span
               style={{
                 background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
@@ -70,66 +53,89 @@ const Services: React.FC = () => {
                 backgroundClip: 'text',
               }}
             >
-              Soluciones Tecnológicas Avanzadas
+              Servicios
             </span>
-          </h3>
+          </h2>
 
-          <p className={`text-lg text-center max-w-3xl mx-auto mb-16 ${
+          <p className={`text-lg text-center max-w-3xl mx-auto mb-8 ${
             theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
           }`}>
-            Servicios especializados para empresas que requieren soluciones tecnológicas de alta complejidad.
+            Ofrecemos una amplia gama de servicios tecnológicos y de desarrollo web para 
+            satisfacer todas las necesidades digitales de tu empresa.
           </p>
 
-          <div className="space-y-12">
-            {avanzadas.map((service, idx) => (
-              <ServiceCard
-                key={service.id}
-                title={service.title}
-                description={service.description}
-                image={service.image}
-                icon={iconMap[service.icon]}
-                isReversed={idx % 2 === 1}
-              />
-            ))}
+          {/* Soluciones Tecnológicas Avanzadas */}
+          <div className="mb-20">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Soluciones Tecnológicas Avanzadas
+              </span>
+            </h3>
+
+            <p className={`text-lg text-center max-w-3xl mx-auto mb-16 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
+              Servicios especializados para empresas que requieren soluciones tecnológicas de alta complejidad.
+            </p>
+
+            <div className="space-y-12">
+              {avanzadas.map((service, idx) => (
+                <ServiceCard
+                  key={service.id}
+                  title={service.title}
+                  description={service.description}
+                  image={service.image}
+                  icon={iconMap[service.icon]}
+                  isReversed={idx % 2 === 1}
+                />
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Desarrollo Web Profesional */}
-        <div>
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Desarrollo Web Profesional
-            </span>
-          </h3>
+          {/* Desarrollo Web Profesional */}
+          <div>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4">
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, #FF1FA7, #00F0FF)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Desarrollo Web Profesional
+              </span>
+            </h3>
 
-          <p className={`text-lg text-center max-w-3xl mx-auto mb-16 ${
-            theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-          }`}>
-            Creamos experiencias web excepcionales que impulsan tu presencia digital y conectan con tu audiencia.
-          </p>
+            <p className={`text-lg text-center max-w-3xl mx-auto mb-16 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
+              Creamos experiencias web excepcionales que impulsan tu presencia digital y conectan con tu audiencia.
+            </p>
 
-          <div className="space-y-12">
-            {web.map((service, idx) => (
-              <ServiceCard
-                key={service.id}
-                title={service.title}
-                description={service.description}
-                image={service.image}
-                icon={iconMap[service.icon]}
-                isReversed={idx % 2 === 1}
-              />
-            ))}
+            <div className="space-y-12">
+              {web.map((service, idx) => (
+                <ServiceCard
+                  key={service.id}
+                  title={service.title}
+                  description={service.description}
+                  image={service.image}
+                  icon={iconMap[service.icon]}
+                  isReversed={idx % 2 === 1}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+    </>
   );
 };
 

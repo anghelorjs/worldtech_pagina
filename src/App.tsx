@@ -8,10 +8,12 @@ import Footer from './components/layout/Footer';
 import SeparadorWaveAzul from './components/common/SeparadorWaveAzul';
 import SeparadorWaveNegro from './components/common/SeparadorWaveNegro';
 import SeparadorWaveInvertido from './components/common/SeparadorWaveInvertido';
+import SEO from './components/common/SEO';
 
 function App() {
   return (
     <ThemeProvider>
+      <SEO />
       <div className="relative min-h-screen bg-black text-white">
         <Header />
         <main>
@@ -28,8 +30,8 @@ function App() {
             <SeparadorWaveNegro />
           </div>
           <Contact />
-          <Footer />
         </main>
+        <Footer />
       </div>
     </ThemeProvider>
   );
