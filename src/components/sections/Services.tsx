@@ -43,7 +43,7 @@ const Services: React.FC = () => {
           </span>
         </h2>
 
-        <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-16">
+        <p className="text-lg text-gray-300 text-center max-w-3xl mx-auto mb-8">
           Ofrecemos una amplia gama de servicios tecnológicos y de desarrollo web para 
           satisfacer todas las necesidades digitales de tu empresa.
         </p>
