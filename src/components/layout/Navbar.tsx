@@ -26,7 +26,6 @@ const Navbar: React.FC = () => {
     { name: 'Contacto', href: '#contacto' },
   ];
 
-  // Determinar logo según el tema
   const logoSrc = theme === 'dark' 
     ? "/src/assets/images/logo-light.webp"
     : "/src/assets/images/logo-dark.webp";
@@ -51,7 +50,6 @@ const Navbar: React.FC = () => {
         `}
       >
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <div className="flex items-center">
             <img 
               src={logoSrc}

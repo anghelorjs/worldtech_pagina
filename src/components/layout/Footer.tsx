@@ -24,7 +24,6 @@ const Footer: React.FC = () => {
 
   const currentYear = new Date().getFullYear();
 
-  // Determinar logo según el tema
   const logoSrc = theme === 'dark' 
     ? "/src/assets/images/logo-light.webp"
     : "/src/assets/images/logo-dark.webp";
@@ -37,7 +36,6 @@ const Footer: React.FC = () => {
       }}
     >
       <Container>
-        {/* Grid de 4 columnas */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Logo */}
           <div className="flex justify-center lg:justify-center">
