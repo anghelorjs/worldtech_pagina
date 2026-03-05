@@ -83,7 +83,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Línea divisoria y derechos reservados */}
         <div className={`border-t pt-8 ${
           theme === 'dark' ? 'border-gray-800' : 'border-gray-400'
         }`}>
