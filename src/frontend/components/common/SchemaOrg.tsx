@@ -27,9 +27,9 @@ const SchemaOrg: React.FC<SchemaOrgProps> = ({
   type,
   name = 'Technological World',
   url = 'https://technologicalworld.website',
-  logo = '/src/assets/images/logo-dark.webp',
+  logo = '/src/frontend/assets/images/logo-dark.webp',
   description = 'Soluciones tecnológicas innovadoras para impulsar tu negocio',
-  image = '/src/assets/images/hero-image.webp',
+  image = '/src/frontend/assets/images/hero-image.webp',
   telephone = '+59177575921',
   email = 'technological.world.dev@gmail.com',
   address = {

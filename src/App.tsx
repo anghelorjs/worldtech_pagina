@@ -1,11 +1,11 @@
 import React, { lazy, Suspense } from 'react';
-import { ThemeProvider } from './context/ThemeContext';
-import Header from './components/layout/Header';
-import Hero from './components/sections/Hero';
-import SeparadorWaveInvertido from './components/common/SeparadorWaveInvertido';
-import SeparadorWaveAzul from './components/common/SeparadorWaveAzul';
-import SeparadorWaveNegro from './components/common/SeparadorWaveNegro';
-import SEO from './components/common/SEO';
+import { ThemeProvider } from './frontend/context/ThemeContext';
+import Header from './frontend/components/layout/Header';
+import Hero from './frontend/components/sections/Hero';
+import SeparadorWaveInvertido from './frontend/components/common/SeparadorWaveInvertido';
+import SeparadorWaveAzul from './frontend/components/common/SeparadorWaveAzul';
+import SeparadorWaveNegro from './frontend/components/common/SeparadorWaveNegro';
+import SEO from './frontend/components/common/SEO';
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center py-20">
@@ -13,10 +13,10 @@ const LoadingSpinner = () => (
   </div>
 );
 
-const About = lazy(() => import('./components/sections/About'));
-const Services = lazy(() => import('./components/sections/Services'));
-const Contact = lazy(() => import('./components/sections/Contact'));
-const Footer = lazy(() => import('./components/layout/Footer'));
+const About = lazy(() => import('./frontend/components/sections/About'));
+const Services = lazy(() => import('./frontend/components/sections/Services'));
+const Contact = lazy(() => import('./frontend/components/sections/Contact'));
+const Footer = lazy(() => import('./frontend/components/layout/Footer'));
 
 function App() {
   return (

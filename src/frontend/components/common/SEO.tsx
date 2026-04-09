@@ -20,7 +20,7 @@ const SEO: React.FC<SEOProps> = ({
   title = 'Technological World - Soluciones Tecnológicas Innovadoras',
   description = 'Transformamos tus ideas en soluciones tecnológicas innovadoras, optimizando procesos y maximizando tu productividad. Desarrollo web, informática forense, sistemas personalizados y más.',
   keywords = 'desarrollo web, informática forense, sistemas personalizados, landing pages, e-commerce, catálogos digitales, tecnología, innovación',
-  image = '/src/assets/images/hero-image.webp',
+  image = '/src/frontend/assets/images/hero-image.webp',
   url = 'https://technologicalworld.website',
   type = 'website',
   publishedTime,

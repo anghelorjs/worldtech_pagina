@@ -25,8 +25,8 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const logoSrc = theme === 'dark' 
-    ? "/src/assets/images/logo-light.webp"
-    : "/src/assets/images/logo-dark.webp";
+    ? "/src/frontend/assets/images/logo-light.webp"
+    : "/src/frontend/assets/images/logo-dark.webp";
 
   return (
     <footer 

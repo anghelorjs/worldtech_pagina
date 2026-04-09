@@ -7,7 +7,7 @@ const HeroSEO: React.FC = () => {
       title="Technological World"
       description="Transformamos tus ideas en soluciones tecnológicas innovadoras, optimizando procesos y maximizando tu productividad. Desarrollo web, sistemas personalizados y más."
       keywords="soluciones tecnológicas, desarrollo web, innovación, productividad, transformación digital"
-      image="/src/assets/images/hero-image.webp"
+      image="/src/frontend/assets/images/hero-image.webp"
       url="/"
       type="website"
     />

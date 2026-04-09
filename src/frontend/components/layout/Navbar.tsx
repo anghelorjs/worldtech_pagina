@@ -27,8 +27,8 @@ const Navbar: React.FC = () => {
   ];
 
   const logoSrc = theme === 'dark' 
-    ? "/src/assets/images/logo-light.webp"
-    : "/src/assets/images/logo-dark.webp";
+    ? "/src/frontend/assets/images/logo-light.webp"
+    : "/src/frontend/assets/images/logo-dark.webp";
 
   return (
     <nav
