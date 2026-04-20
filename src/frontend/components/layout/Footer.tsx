@@ -5,6 +5,9 @@ import QuickLinks from '../common/QuickLinks';
 import ServiceLinks from '../common/ServiceLinks';
 import FooterContact from '../common/FooterContact';
 
+import logoLight from '../../assets/images/logo-light.webp';
+import logoDark from '../../assets/images/logo-dark.webp';
+
 const Footer: React.FC = () => {
   const { theme } = useTheme();
   
@@ -24,9 +27,7 @@ const Footer: React.FC = () => {
 
   const currentYear = new Date().getFullYear();
 
-  const logoSrc = theme === 'dark' 
-    ? "/src/frontend/assets/images/logo-light.webp"
-    : "/src/frontend/assets/images/logo-dark.webp";
+  const logoSrc = theme === 'dark' ? logoLight : logoDark;
 
   return (
     <footer 

@@ -28,7 +28,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-helmet-async'],
-          'icons': ['./src/assets/icons'],
+          'icons': ['./src/frontend/assets/icons/index.tsx'],
         },
         entryFileNames: 'assets/[name].[hash].js',
         chunkFileNames: 'assets/[name].[hash].js',

@@ -5,6 +5,8 @@ import Button from '../common/Button';
 import { useTheme } from '../../hooks/useTheme';
 import HeroSEO from './HeroSEO';
 import SchemaHome from './SchemaHome';
+// ✅ IMPORTAR LA IMAGEN
+import heroImage from '../../assets/images/hero-image.webp';
 
 const Hero: React.FC = () => {
   const { theme } = useTheme();
@@ -76,7 +78,7 @@ const Hero: React.FC = () => {
             <div className="flex-1 flex justify-end">
               <div ref={imgRef} className="relative">
                 <img
-                  src="/src/frontend/assets/images/hero-image.webp"
+                  src={heroImage}  // ✅ AHORA USA LA IMPORTACIÓN
                   alt="Tecnología e innovación - Desarrollo de software por Technological World"
                   className="w-full max-w-md md:max-w-lg lg:min-w-xl relative z-10"
                   style={{

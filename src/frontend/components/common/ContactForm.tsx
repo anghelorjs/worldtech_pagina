@@ -3,37 +3,101 @@ import styled from 'styled-components';
 import { useTheme } from '../../hooks/useTheme';
 import { services } from '../../data/services';
 
+/* ─── Validation rules ──────────────────────────────────────────── */
+const PHONE_RE  = /^[+]?[\d\s\-().]{7,20}$/;
+const EMAIL_RE  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validate(data: typeof INITIAL): Partial<typeof INITIAL> {
+  const errors: Partial<typeof INITIAL> = {};
+
+  if (!data.nombre.trim()) {
+    errors.nombre = 'El nombre es obligatorio.';
+  } else if (data.nombre.trim().length < 3) {
+    errors.nombre = 'Mínimo 3 caracteres.';
+  }
+
+  if (!data.email.trim()) {
+    errors.email = 'El correo es obligatorio.';
+  } else if (!EMAIL_RE.test(data.email.trim())) {
+    errors.email = 'Correo electrónico inválido.';
+  }
+
+  if (data.telefono.trim() && !PHONE_RE.test(data.telefono.trim())) {
+    errors.telefono = 'Número de teléfono inválido.';
+  }
+
+  if (!data.servicio) {
+    errors.servicio = 'Selecciona un servicio.';
+  }
+
+  if (!data.mensaje.trim()) {
+    errors.mensaje = 'El mensaje es obligatorio.';
+  } else if (data.mensaje.trim().length < 10) {
+    errors.mensaje = 'Mínimo 10 caracteres.';
+  }
+
+  return errors;
+}
+
+/* ─── Types ─────────────────────────────────────────────────────── */
+const INITIAL = {
+  nombre:   '',
+  email:    '',
+  telefono: '',
+  servicio: '',
+  mensaje:  '',
+};
+
+/* ─── Component ─────────────────────────────────────────────────── */
 const ContactForm: React.FC = () => {
   const { theme } = useTheme();
-  const [formData, setFormData] = useState({
-    nombre: '',
-    email: '',
-    telefono: '',
-    servicio: '',
-    mensaje: ''
-  });
+  const [formData, setFormData] = useState({ ...INITIAL });
+  const [errors,   setErrors]   = useState<Partial<typeof INITIAL>>({});
+  const [touched,  setTouched]  = useState<Partial<Record<keyof typeof INITIAL, boolean>>>({});
+  const [submitted, setSubmitted] = useState(false);
+
+  /* Mark field as touched on blur and validate it */
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const name = e.target.name as keyof typeof INITIAL;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    const fieldErrors = validate(formData);
+    setErrors(prev => ({ ...prev, [name]: fieldErrors[name] }));
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    const next = { ...formData, [name]: value };
+    setFormData(next);
+    /* Clear error live once the field becomes valid */
+    if (touched[name as keyof typeof INITIAL]) {
+      const fieldErrors = validate(next);
+      setErrors(prev => ({ ...prev, [name]: fieldErrors[name as keyof typeof INITIAL] }));
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    const phoneNumber = '59177575921'; 
-    
-    const message = 
+    /* Touch all fields so every error shows */
+    setTouched({ nombre: true, email: true, telefono: true, servicio: true, mensaje: true });
+    const allErrors = validate(formData);
+    setErrors(allErrors);
+    if (Object.keys(allErrors).length > 0) return;
+
+    const phoneNumber = '59177575921';
+    const message =
       `*Nuevo mensaje de contacto*%0A%0A` +
       `*Nombre:* ${formData.nombre}%0A` +
       `*Email:* ${formData.email}%0A` +
       `*Teléfono:* ${formData.telefono || 'No proporcionado'}%0A` +
       `*Servicio de interés:* ${getServiceName(formData.servicio)}%0A` +
       `*Mensaje:*%0A${formData.mensaje}`;
-    
+
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    setFormData({ ...INITIAL });
+    setTouched({});
+    setErrors({});
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 4000);
   };
 
   const getServiceName = (serviceId: string) => {
@@ -41,92 +105,122 @@ const ContactForm: React.FC = () => {
     return service ? service.title : 'No especificado';
   };
 
+  const field = (name: keyof typeof INITIAL) => ({
+    hasError:  touched[name] && !!errors[name],
+    hasSuccess: touched[name] && !errors[name] && !!formData[name],
+  });
+
   return (
     <StyledWrapper theme={theme}>
       <div id="Container">
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit} noValidate>
           <div id="login-lable">Envíanos un mensaje</div>
 
-          {/* Fila 1: Nombre + Email */}
+          {submitted && (
+            <div className="success-banner">
+              ✓ Mensaje enviado correctamente
+            </div>
+          )}
+
+          {/* Row 1 */}
           <div className="form-row">
             <div className="form-group">
               <label>Nombre Completo *</label>
-              <input
-                className="form-content"
-                type="text"
-                name="nombre"
-                placeholder="Tu nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-                required
-              />
+              <div className={`input-wrap ${field('nombre').hasError ? 'error' : ''} ${field('nombre').hasSuccess ? 'success' : ''}`}>
+                <input
+                  className="form-content"
+                  type="text"
+                  name="nombre"
+                  placeholder="Tu nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {field('nombre').hasSuccess && <span className="icon">✓</span>}
+              </div>
+              {field('nombre').hasError && <span className="error-msg">{errors.nombre}</span>}
             </div>
+
             <div className="form-group">
               <label>Correo Electrónico *</label>
-              <input
-                className="form-content"
-                type="email"
-                name="email"
-                placeholder="tu@email.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+              <div className={`input-wrap ${field('email').hasError ? 'error' : ''} ${field('email').hasSuccess ? 'success' : ''}`}>
+                <input
+                  className="form-content"
+                  type="email"
+                  name="email"
+                  placeholder="tu@email.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {field('email').hasSuccess && <span className="icon">✓</span>}
+              </div>
+              {field('email').hasError && <span className="error-msg">{errors.email}</span>}
             </div>
           </div>
 
-          {/* Fila 2: Teléfono + Servicio */}
+          {/* Row 2 */}
           <div className="form-row">
             <div className="form-group">
-              <label>Teléfono</label>
-              <input
-                className="form-content"
-                type="tel"
-                name="telefono"
-                placeholder="Tu teléfono"
-                value={formData.telefono}
-                onChange={handleChange}
-              />
+              <label>Teléfono <span className="optional">(opcional)</span></label>
+              <div className={`input-wrap ${field('telefono').hasError ? 'error' : ''} ${field('telefono').hasSuccess ? 'success' : ''}`}>
+                <input
+                  className="form-content"
+                  type="tel"
+                  name="telefono"
+                  placeholder="Tu teléfono"
+                  value={formData.telefono}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {field('telefono').hasSuccess && <span className="icon">✓</span>}
+              </div>
+              {field('telefono').hasError && <span className="error-msg">{errors.telefono}</span>}
             </div>
+
             <div className="form-group">
               <label>Servicio de Interés *</label>
-              <select
-                className="form-content"
-                name="servicio"
-                aria-label="Servicio de Interés"
-                value={formData.servicio}
-                onChange={handleChange}
-                required
-              >
-                <option value="" disabled>Selecciona...</option>
-                {services.map(service => (
-                  <option key={service.id} value={service.id}>
-                    {service.title}
-                  </option>
-                ))}
-              </select>
+              <div className={`input-wrap ${field('servicio').hasError ? 'error' : ''} ${field('servicio').hasSuccess ? 'success' : ''}`}>
+                <select
+                  className="form-content"
+                  name="servicio"
+                  aria-label="Servicio de Interés"
+                  value={formData.servicio}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option value="" disabled>Selecciona...</option>
+                  {services.map(service => (
+                    <option key={service.id} value={service.id}>{service.title}</option>
+                  ))}
+                </select>
+                {field('servicio').hasSuccess && <span className="icon select-icon">✓</span>}
+              </div>
+              {field('servicio').hasError && <span className="error-msg">{errors.servicio}</span>}
             </div>
           </div>
 
-          {/* Fila 3: Mensaje full width */}
+          {/* Row 3 */}
           <div className="form-group full-width">
             <label>Mensaje *</label>
-            <textarea
-              className="form-content textarea"
-              name="mensaje"
-              placeholder="Cuéntanos sobre tu proyecto..."
-              rows={4}
-              value={formData.mensaje}
-              onChange={handleChange}
-              required
-            />
+            <div className={`input-wrap ${field('mensaje').hasError ? 'error' : ''} ${field('mensaje').hasSuccess ? 'success' : ''}`}>
+              <textarea
+                className="form-content textarea"
+                name="mensaje"
+                placeholder="Cuéntanos sobre tu proyecto..."
+                rows={4}
+                value={formData.mensaje}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </div>
+            {field('mensaje').hasError && <span className="error-msg">{errors.mensaje}</span>}
           </div>
 
           <button type="submit">Enviar Mensaje</button>
 
           <p className="terms">
-            Al enviar este formulario, aceptas que nos pongamos en contacto contigo
-            para discutir tu proyecto y nuestros servicios.
+            Al enviar este formulario, aceptas que nos pongamos en contacto contigo para discutir tu proyecto y nuestros servicios.
           </p>
         </form>
 
@@ -212,6 +306,7 @@ const ContactForm: React.FC = () => {
   );
 };
 
+/* ─── Styles ─────────────────────────────────────────────────────── */
 const StyledWrapper = styled.div<{ theme: string }>`
   width: 100%;
   overflow: hidden;
@@ -238,11 +333,11 @@ const StyledWrapper = styled.div<{ theme: string }>`
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
-    border: 2px solid ${props => props.theme === 'dark' 
-      ? 'rgba(255, 255, 255, 0.1)' 
+    border: 2px solid ${props => props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.1)'
       : 'rgba(0, 0, 0, 0.1)'};
-    background: ${props => props.theme === 'dark' 
-      ? 'rgba(10, 20, 40, 0.8)' 
+    background: ${props => props.theme === 'dark'
+      ? 'rgba(10, 20, 40, 0.8)'
       : 'rgba(255, 255, 255, 0.8)'};
     box-shadow: 0 0 30px rgba(255, 31, 167, 0.3), 0 0 30px rgba(0, 240, 255, 0.3);
     backdrop-filter: blur(10px);
@@ -254,7 +349,6 @@ const StyledWrapper = styled.div<{ theme: string }>`
 
   #login-lable {
     text-align: center;
-    color: white;
     font-size: 1.8rem;
     font-weight: 600;
     letter-spacing: 2px;
@@ -263,6 +357,19 @@ const StyledWrapper = styled.div<{ theme: string }>`
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+  }
+
+  /* ── Success banner ── */
+  .success-banner {
+    background: rgba(0, 229, 160, 0.15);
+    border: 1px solid rgba(0, 229, 160, 0.4);
+    color: #00E5A0;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.03em;
   }
 
   .form-row {
@@ -282,12 +389,70 @@ const StyledWrapper = styled.div<{ theme: string }>`
   }
 
   .form-group label {
-    color: ${props => props.theme === 'dark' 
-      ? 'rgba(255, 255, 255, 0.85)' 
+    color: ${props => props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.85)'
       : 'rgba(0, 0, 0, 0.7)'};
     font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.5px;
+  }
+
+  .optional {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: ${props => props.theme === 'dark'
+      ? 'rgba(255,255,255,0.35)'
+      : 'rgba(0,0,0,0.35)'};
+  }
+
+  /* ── Input wrapper for icon positioning ── */
+  .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-wrap .icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00E5A0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    pointer-events: none;
+  }
+
+  .input-wrap .select-icon {
+    right: 36px; /* don't overlap the select arrow */
+  }
+
+  /* Border states */
+  .input-wrap.error .form-content {
+    border-color: #FF4D6D !important;
+    box-shadow: 0 0 8px rgba(255, 77, 109, 0.25);
+  }
+
+  .input-wrap.success .form-content {
+    border-color: #00E5A0 !important;
+    box-shadow: 0 0 8px rgba(0, 229, 160, 0.2);
+  }
+
+  /* ── Error message ── */
+  .error-msg {
+    font-size: 0.75rem;
+    color: #FF4D6D;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-top: -2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &::before {
+      content: '⚠';
+      font-size: 0.7rem;
+    }
   }
 
   .form-content {
@@ -297,14 +462,14 @@ const StyledWrapper = styled.div<{ theme: string }>`
     letter-spacing: 1px;
     font-weight: 400;
     border-radius: 8px;
-    border: 1px solid ${props => props.theme === 'dark' 
-      ? 'rgba(255, 255, 255, 0.2)' 
+    border: 1px solid ${props => props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.2)'
       : 'rgba(0, 0, 0, 0.1)'};
-    background: ${props => props.theme === 'dark' 
-      ? 'rgba(0, 0, 0, 0.3)' 
+    background: ${props => props.theme === 'dark'
+      ? 'rgba(0, 0, 0, 0.3)'
       : 'rgba(255, 255, 255, 0.3)'};
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
     font-size: 0.9rem;
     width: 100%;
   }
@@ -339,13 +504,13 @@ const StyledWrapper = styled.div<{ theme: string }>`
     box-shadow: 0 0 15px rgba(255, 31, 167, 0.3);
   }
 
-  .form-content:hover {
+  .form-content:hover:not(:focus-visible) {
     border-color: #00F0FF;
   }
 
   ::placeholder {
-    color: ${props => props.theme === 'dark' 
-      ? 'rgba(255, 255, 255, 0.4)' 
+    color: ${props => props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.4)'
       : 'rgba(0, 0, 0, 0.3)'};
     font-weight: 300;
   }
@@ -372,8 +537,8 @@ const StyledWrapper = styled.div<{ theme: string }>`
 
   .terms {
     font-size: 0.78rem;
-    color: ${props => props.theme === 'dark' 
-      ? 'rgba(255, 255, 255, 0.6)' 
+    color: ${props => props.theme === 'dark'
+      ? 'rgba(255, 255, 255, 0.6)'
       : 'rgba(0, 0, 0, 0.5)'};
     text-align: center;
     margin-top: 0.25rem;

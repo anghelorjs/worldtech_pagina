@@ -2,6 +2,14 @@ import React from 'react';
 import { useTheme } from '../../hooks/useTheme';
 import Button from './Button';
 
+// ✅ IMPORTAR TODAS LAS IMÁGENES
+import serviceBg1 from '../../assets/images/service-bg-1.webp';
+import serviceBg2 from '../../assets/images/service-bg-2.webp';
+import serviceBg3 from '../../assets/images/service-bg-3.webp';
+import serviceBg4 from '../../assets/images/service-bg-4.webp';
+import serviceBg5 from '../../assets/images/service-bg-5.webp';
+import serviceBg6 from '../../assets/images/service-bg-6.webp';
+
 interface ServiceCardProps {
   title: string;
   description: string;
@@ -9,6 +17,16 @@ interface ServiceCardProps {
   icon: React.ReactNode;
   isReversed?: boolean;
 }
+
+// ✅ MAPEO DE IMÁGENES (nombre del archivo -> importación)
+const imageMap: Record<string, string> = {
+  'service-bg-1.webp': serviceBg1,
+  'service-bg-2.webp': serviceBg2,
+  'service-bg-3.webp': serviceBg3,
+  'service-bg-4.webp': serviceBg4,
+  'service-bg-5.webp': serviceBg5,
+  'service-bg-6.webp': serviceBg6,
+};
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ 
   title, 
@@ -23,6 +41,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   const contentColumnOrder = isReversed ? 'md:order-1' : 'md:order-2';
   const iconAlignment = isReversed ? 'self-end' : 'self-start';
 
+  // ✅ OBTENER LA RUTA CORRECTA DE LA IMAGEN
+  const imageSrc = imageMap[image] || image;
+
   return (
     <div className={`w-full rounded-3xl overflow-hidden border transition-colors duration-300 ${
       theme === 'dark' 
@@ -33,7 +54,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         <div className={`relative w-full h-[50%] md:h-auto md:w-[70%] ${imageColumnOrder}`}>
           <div className="absolute inset-0">
             <img 
-              src={image} 
+              src={imageSrc}  // ✅ AHORA USA LA RUTA CORRECTA
               alt={`${title} - Servicio tecnológico de Technological World`}
               className="w-full h-full object-cover"
             />
@@ -78,9 +99,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               {description}
             </p>
             <div className="flex justify-center">
-              <Button href="#contacto" variant="primary">
-                Comenzar Proyecto
-              </Button>
+              <Button href="#contacto">Comenzar Proyecto</Button>
             </div>
           </div>
         </div>

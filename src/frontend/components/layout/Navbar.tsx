@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ThemeToggle from '../common/ThemeToggle';
 import { useTheme } from '../../hooks/useTheme';
 
+// ✅ IMPORTAR LAS IMÁGENES DEL NAVBAR
+import logoLight from '../../assets/images/logo-light.webp';
+import logoDark from '../../assets/images/logo-dark.webp';
+
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,9 +30,8 @@ const Navbar: React.FC = () => {
     { name: 'Contacto', href: '#contacto' },
   ];
 
-  const logoSrc = theme === 'dark' 
-    ? "/src/frontend/assets/images/logo-light.webp"
-    : "/src/frontend/assets/images/logo-dark.webp";
+  // ✅ USAR LAS IMPORTACIONES EN VEZ DE RUTAS STRING
+  const logoSrc = theme === 'dark' ? logoLight : logoDark;
 
   return (
     <nav

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { ThemeProvider } from './frontend/context/ThemeContext';
 import Header from './frontend/components/layout/Header';
 import Hero from './frontend/components/sections/Hero';

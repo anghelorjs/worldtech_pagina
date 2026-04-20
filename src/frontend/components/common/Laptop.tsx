@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../../assets/images/logo-light.webp'
+import logoSvg from '../../assets/images/logo-light.webp';
 
 interface LaptopProps {
   logoSrc?: string;
 }
 
-const Laptop: React.FC<LaptopProps> = ({ logoSrc = logo }) => {
+const Laptop: React.FC<LaptopProps> = ({ logoSrc = logoSvg }) => {
   return (
     <StyledWrapper>
       <div className="macbook">

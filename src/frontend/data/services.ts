@@ -1,10 +1,11 @@
+// ✅ CAMBIAR LAS RUTAS - ahora solo el nombre del archivo
 export interface Service {
   id: string;
   title: string;
   description: string;
   category: 'avanzadas' | 'web';
   icon: string; 
-  image: string;
+  image: string;  // Ahora solo el nombre del archivo, no la ruta completa
 }
 
 export const services: Service[] = [
@@ -14,7 +15,7 @@ export const services: Service[] = [
     description: 'Desarrollo de sistemas web robustos y escalables diseñados para optimizar los procesos empresariales y mejorar la productividad.',
     category: 'avanzadas',
     icon: 'CodeIcon',
-    image: '/src/frontend/assets/images/service-bg-1.webp',
+    image: 'service-bg-1.webp',  // ✅ SOLO EL NOMBRE
   },
   {
     id: 'informatica-forense',
@@ -22,7 +23,7 @@ export const services: Service[] = [
     description: 'Análisis especializado de evidencia digital, recuperación de datos e investigaciones cibernéticas para empresas y organizaciones.',
     category: 'avanzadas',
     icon: 'SearchIcon',
-    image: '/src/frontend/assets/images/service-bg-2.webp',
+    image: 'service-bg-2.webp',  // ✅ SOLO EL NOMBRE
   },
   {
     id: 'landing-pages',
@@ -30,7 +31,7 @@ export const services: Service[] = [
     description: 'Diseñamos páginas de aterrizaje estratégicamente optimizadas para maximizar la conversión de visitantes en clientes.',
     category: 'web',
     icon: 'LayoutIcon',
-    image: '/src/frontend/assets/images/service-bg-3.webp',
+    image: 'service-bg-3.webp',  // ✅ SOLO EL NOMBRE
   },
   {
     id: 'portafolios-profesionales',
@@ -38,7 +39,7 @@ export const services: Service[] = [
     description: 'Diseñamos portafolios digitales completamente personalizados que funcionan como tu vitrina profesional en línea.',
     category: 'web',
     icon: 'UserIcon',
-    image: '/src/frontend/assets/images/service-bg-4.webp',
+    image: 'service-bg-4.webp',  // ✅ SOLO EL NOMBRE
   },
   {
     id: 'e-commerce',
@@ -46,7 +47,7 @@ export const services: Service[] = [
     description: 'Impulsamos tu negocio con tiendas online listas para vender, diseñadas para ofrecer una experiencia de compra segura y sin complicaciones.',
     category: 'web',
     icon: 'ShoppingCartIcon',
-    image: '/src/frontend/assets/images/service-bg-5.webp',
+    image: 'service-bg-5.webp',  // ✅ SOLO EL NOMBRE
   },
   {
     id: 'catalogos-digitales',
@@ -54,6 +55,6 @@ export const services: Service[] = [
     description: 'Catálogos interactivos modernos que muestran tus productos de manera atractiva, profesional y visualmente impactante.',
     category: 'web',
     icon: 'BookIcon',
-    image: '/src/frontend/assets/images/service-bg-6.webp',
+    image: 'service-bg-6.webp',  // ✅ SOLO EL NOMBRE
   },
 ];
