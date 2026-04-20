@@ -4,10 +4,10 @@ import { useTheme } from '../../hooks/useTheme';
 
 interface ButtonProps {
   href?: string;
-  children?: React.ReactNode;  // ← AGREGAR ESTO
+  children?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ href, children }) => {  // ← AGREGAR children aquí también
+const Button: React.FC<ButtonProps> = ({ href, children }) => {
   const { theme } = useTheme();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -20,7 +20,6 @@ const Button: React.FC<ButtonProps> = ({ href, children }) => {  // ← AGREGAR 
     }
   };
 
-  // Si se proporciona children, úsalo; si no, usa el contenido por defecto
   const content = children || (
     <>
       <svg className="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -99,7 +98,7 @@ const StyledWrapper = styled.div<{ theme: string }>`
     --border-radius: 32px;
     --padding: 4px;
     --transition: 0.4s;
-    --button-color: ${props => props.theme === 'dark' ? '#101010' : '#f0f0ff'};
+    --button-color: ${props => props.theme === 'dark' ? '#1a1a2e' : '#1a1a2e'};
     --highlight-color-hue: 280deg;
 
     user-select: none;
@@ -130,17 +129,17 @@ const StyledWrapper = styled.div<{ theme: string }>`
         0px -16px 16px rgba(0, 0, 0, 0.08)
       `
       : `
-        inset 0px 1px 1px rgba(255, 255, 255, 0.5),
-        inset 0px 2px 2px rgba(255, 255, 255, 0.4),
-        inset 0px 4px 4px rgba(255, 255, 255, 0.3),
+        inset 0px 1px 1px rgba(255, 255, 255, 0.8),
+        inset 0px 2px 2px rgba(255, 255, 255, 0.6),
+        inset 0px 4px 4px rgba(255, 255, 255, 0.4),
         inset 0px 8px 8px rgba(255, 255, 255, 0.2),
         inset 0px 16px 16px rgba(255, 255, 255, 0.1),
-        0px 2px 4px rgba(0, 0, 0, 0.1)
+        0px 2px 8px rgba(0, 0, 0, 0.15)
     `};
 
     border: solid 2px transparent;
     background-image: linear-gradient(var(--button-color), var(--button-color)), 
-                      linear-gradient(135deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5);
+                      linear-gradient(135deg, #FF1FA7, #00F0FF);
     background-origin: border-box;
     background-clip: padding-box, border-box;
     border-radius: var(--border-radius);
@@ -163,7 +162,7 @@ const StyledWrapper = styled.div<{ theme: string }>`
     pointer-events: none;
     background-image: ${props => props.theme === 'dark' 
       ? 'linear-gradient(0deg, #0004, #000a)'
-      : 'linear-gradient(0deg, #fff4, #fffa)'
+      : 'linear-gradient(0deg, #0001, #0003)'
     };
     z-index: -2;
     transition:
@@ -216,7 +215,7 @@ const StyledWrapper = styled.div<{ theme: string }>`
   .btn-letter {
     position: relative;
     display: inline-block;
-    color: ${props => props.theme === 'dark' ? '#fff5' : '#4444aa'};
+    color: ${props => props.theme === 'dark' ? '#ffffffcc' : '#1a1a2e'};
     animation: letter-anim 2s ease-in-out infinite;
     transition:
       color var(--transition),
@@ -229,9 +228,9 @@ const StyledWrapper = styled.div<{ theme: string }>`
     50% {
       text-shadow: ${props => props.theme === 'dark'
         ? '0 0 3px #fff8'
-        : '0 0 4px rgba(100,100,200,0.5)'
+        : '0 0 3px #FF1FA7'
       };
-      color: ${props => props.theme === 'dark' ? '#fff' : '#2222aa'};
+      color: ${props => props.theme === 'dark' ? '#ffffff' : '#FF1FA7'};
     }
   }
 
@@ -239,12 +238,12 @@ const StyledWrapper = styled.div<{ theme: string }>`
     height: 26px;
     width: 26px;
     margin-right: 0.8rem;
-    fill: ${props => props.theme === 'dark' ? '#e8e8e8' : '#5555bb'};
+    fill: ${props => props.theme === 'dark' ? '#e8e8e8' : '#1a1a2e'};
     animation: flicker 2s linear infinite;
     animation-delay: 0.5s;
     filter: ${props => props.theme === 'dark'
       ? 'drop-shadow(0 0 2px #fff9)'
-      : 'drop-shadow(0 0 2px rgba(100,100,200,0.4))'
+      : 'drop-shadow(0 0 2px #FF1FA7)'
     };
     transition:
       fill var(--transition),
@@ -332,7 +331,7 @@ const StyledWrapper = styled.div<{ theme: string }>`
       transform: scale(1.5);
       filter: ${props => props.theme === 'dark'
         ? 'blur(8px) brightness(150%) drop-shadow(-24px 8px 8px hsl(var(--highlight-color-hue), 100%, 70%))'
-        : 'blur(8px) brightness(150%) drop-shadow(-24px 8px 8px hsla(var(--highlight-color-hue), 100%, 30%, 0.5))'
+        : 'blur(8px) brightness(150%) drop-shadow(-24px 8px 8px #FF1FA7)'
       };
     }
   }
@@ -358,7 +357,7 @@ const StyledWrapper = styled.div<{ theme: string }>`
     filter: brightness(100%);
   }
 
-  /* Animation delays para "Comenzar Proyecto" (17 letras + espacio) */
+  /* Animation delays */
   .txt-1 .btn-letter:nth-child(1) { animation-delay: 0s; }
   .txt-1 .btn-letter:nth-child(2) { animation-delay: 0.05s; }
   .txt-1 .btn-letter:nth-child(3) { animation-delay: 0.1s; }
@@ -377,7 +376,6 @@ const StyledWrapper = styled.div<{ theme: string }>`
   .txt-1 .btn-letter:nth-child(16) { animation-delay: 0.75s; }
   .txt-1 .btn-letter:nth-child(17) { animation-delay: 0.8s; }
 
-  /* Animation delays para "Contactando..." (14 caracteres) */
   .txt-2 .btn-letter:nth-child(1) { animation-delay: 0s; }
   .txt-2 .btn-letter:nth-child(2) { animation-delay: 0.05s; }
   .txt-2 .btn-letter:nth-child(3) { animation-delay: 0.1s; }
@@ -396,10 +394,10 @@ const StyledWrapper = styled.div<{ theme: string }>`
   .btn:active {
     border: solid 2px transparent;
     background-image: linear-gradient(var(--button-color), var(--button-color)), 
-                      linear-gradient(135deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5);
+                      linear-gradient(135deg, #FF1FA7, #00F0FF);
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    filter: brightness(1.1);
+    filter: brightness(1.05);
   }
   
   .btn:active::before {
@@ -426,10 +424,10 @@ const StyledWrapper = styled.div<{ theme: string }>`
   .btn:hover {
     border: solid 2px transparent;
     background-image: linear-gradient(var(--button-color), var(--button-color)), 
-                      linear-gradient(135deg, #FF3BFF, #ECBFBF, #5C24FF, #D94FD5);
+                      linear-gradient(135deg, #FF1FA7, #00F0FF);
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    filter: brightness(1.05);
+    filter: brightness(1.02);
   }
 
   .btn:hover::before {
@@ -448,10 +446,10 @@ const StyledWrapper = styled.div<{ theme: string }>`
   }
 
   .btn:hover .btn-svg {
-    fill: ${props => props.theme === 'dark' ? '#fff' : '#000'};
+    fill: ${props => props.theme === 'dark' ? '#fff' : '#FF1FA7'};
     filter: ${props => props.theme === 'dark'
       ? 'drop-shadow(0 0 3px hsl(var(--highlight-color-hue), 100%, 70%)) drop-shadow(0 -4px 6px #0009)'
-      : 'drop-shadow(0 0 3px hsla(var(--highlight-color-hue), 100%, 30%, 0.5)) drop-shadow(0 -4px 6px #0003)'
+      : 'drop-shadow(0 0 3px #FF1FA7) drop-shadow(0 -4px 6px #0001)'
     };
     animation: none;
   }

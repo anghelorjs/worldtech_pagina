@@ -19,9 +19,14 @@ const specialties = [
         <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
       </svg>
     ),
-    accent: '#00F0FF',
-    dim: 'rgba(0,240,255,0.10)',
-    border: 'rgba(0,240,255,0.35)',
+    // Colores para modo oscuro
+    darkAccent: '#00F0FF',
+    darkDim: 'rgba(0,240,255,0.15)',
+    darkBorder: 'rgba(0,240,255,0.5)',
+    // Colores para modo claro
+    lightAccent: '#0085A1',
+    lightDim: 'rgba(0,133,161,0.12)',
+    lightBorder: 'rgba(0,133,161,0.4)',
   },
   {
     label: 'Servicio Técnico en PC',
@@ -30,9 +35,12 @@ const specialties = [
         <rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
       </svg>
     ),
-    accent: '#FF1FA7',
-    dim: 'rgba(255,31,167,0.10)',
-    border: 'rgba(255,31,167,0.35)',
+    darkAccent: '#FF1FA7',
+    darkDim: 'rgba(255,31,167,0.15)',
+    darkBorder: 'rgba(255,31,167,0.5)',
+    lightAccent: '#C4006A',
+    lightDim: 'rgba(196,0,106,0.12)',
+    lightBorder: 'rgba(196,0,106,0.4)',
   },
   {
     label: 'Recuperación de Datos',
@@ -41,9 +49,12 @@ const specialties = [
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
       </svg>
     ),
-    accent: '#7B61FF',
-    dim: 'rgba(123,97,255,0.10)',
-    border: 'rgba(123,97,255,0.35)',
+    darkAccent: '#7B61FF',
+    darkDim: 'rgba(123,97,255,0.15)',
+    darkBorder: 'rgba(123,97,255,0.5)',
+    lightAccent: '#5A3DCC',
+    lightDim: 'rgba(90,61,204,0.12)',
+    lightBorder: 'rgba(90,61,204,0.4)',
   },
   {
     label: 'Informática Forense',
@@ -52,51 +63,73 @@ const specialties = [
         <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
       </svg>
     ),
-    accent: '#00E5A0',
-    dim: 'rgba(0,229,160,0.10)',
-    border: 'rgba(0,229,160,0.35)',
+    darkAccent: '#00E5A0',
+    darkDim: 'rgba(0,229,160,0.15)',
+    darkBorder: 'rgba(0,229,160,0.5)',
+    lightAccent: '#008A63',
+    lightDim: 'rgba(0,138,99,0.12)',
+    lightBorder: 'rgba(0,138,99,0.4)',
   },
 ];
 
 interface BadgeProps {
   label: string;
   icon: React.ReactNode;
-  accent: string;
-  dim: string;
-  border: string;
+  darkAccent: string;
+  darkDim: string;
+  darkBorder: string;
+  lightAccent: string;
+  lightDim: string;
+  lightBorder: string;
 }
 
-const SpecialtyBadge: React.FC<BadgeProps> = ({ label, icon, accent, dim, border }) => (
-  <div
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: '10px',
-      padding: '10px 20px',
-      borderRadius: '50px',
-      background: dim,
-      border: `1px solid ${border}`,
-      color: accent,
-      fontFamily: "'DM Sans', sans-serif",
-      fontSize: '0.875rem',
-      fontWeight: 500,
-      whiteSpace: 'nowrap',
-      transition: 'box-shadow 0.3s ease, transform 0.3s ease',
-      cursor: 'default',
-    }}
-    onMouseEnter={e => {
-      (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 16px 2px ${border}`;
-      (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-3px)';
-    }}
-    onMouseLeave={e => {
-      (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-      (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
-    }}
-  >
-    {icon}
-    <span>{label}</span>
-  </div>
-);
+const SpecialtyBadge: React.FC<BadgeProps & { isDark: boolean }> = ({ 
+  label, 
+  icon, 
+  darkAccent, 
+  darkDim, 
+  darkBorder,
+  lightAccent,
+  lightDim,
+  lightBorder,
+  isDark 
+}) => {
+  const accent = isDark ? darkAccent : lightAccent;
+  const dim = isDark ? darkDim : lightDim;
+  const border = isDark ? darkBorder : lightBorder;
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        padding: '10px 20px',
+        borderRadius: '50px',
+        background: dim,
+        border: `1px solid ${border}`,
+        color: accent,
+        fontFamily: "'DM Sans', sans-serif",
+        fontSize: '0.875rem',
+        fontWeight: 500,
+        whiteSpace: 'nowrap',
+        transition: 'box-shadow 0.3s ease, transform 0.3s ease',
+        cursor: 'default',
+      }}
+      onMouseEnter={e => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 16px 2px ${border}`;
+        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-3px)';
+      }}
+      onMouseLeave={e => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+        (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+      }}
+    >
+      {icon}
+      <span>{label}</span>
+    </div>
+  );
+};
 
 const About: React.FC = () => {
   const { theme } = useTheme();
@@ -208,15 +241,17 @@ const About: React.FC = () => {
             }}
           >
             {specialties.map((s) => (
-              <SpecialtyBadge key={s.label} {...s} />
+              <SpecialtyBadge 
+                key={s.label} 
+                {...s} 
+                isDark={isDark}
+              />
             ))}
           </div>
 
           <div ref={profileRef} className="flex justify-center mb-16">
             <ProfileCircle />
           </div>
-
-          
 
           <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {features.map((feature, index) => (

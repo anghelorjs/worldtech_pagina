@@ -5,7 +5,7 @@ const HeroSEO: React.FC = () => {
   return (
     <SEO
       title="Technological World"
-      description="Transformamos tus ideas en soluciones tecnológicas innovadoras, optimizando procesos y maximizando tu productividad. Desarrollo web, sistemas personalizados y más."
+      description="Somos una empresa de desarrollo de software y servicio técnico en computadoras con sede en La Paz, Bolivia. También ofrecemos recuperación de información e informática forense, brindando soluciones tecnológicas integrales a empresas y personas."
       keywords="soluciones tecnológicas, desarrollo web, innovación, productividad, transformación digital"
       image="/src/frontend/assets/images/hero-image.webp"
       url="/"
